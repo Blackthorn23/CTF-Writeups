@@ -1,13 +1,10 @@
 <img src="/assets/images/logo.jpg" alt="BlackWolf Logo" width="200" />
 
----
-title: "CTF Writeups"
-----
+# CTF Writeups by Nawfal Syafi
 
-## Welcome to My CTF Writeups
-This site contains my writeups for CTF challenges.
+Welcome to my collection of CTF writeups. Click on a CTF event to view challenges.
 
-- [Bitlocker-2 Writeup](bitlocker-2.md)
-- [Perplexed Reverse Engineering](perplexed.md)
-
-More writeups coming soon! 🚀
+## CTF Events
+- [PicoCTF](picoctf/index.md)
+- [HackTheBox](htb/index.md)
+- [TryHackMe](thm/index.md)
