@@ -1,4 +1,3 @@
-<img src="/assets/images/logo.jpg" alt="BlackWolf Logo" width="200" />
 
 # CTF Writeups by Nawfal Syafi
 
