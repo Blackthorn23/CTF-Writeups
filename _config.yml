@@ -6,3 +6,6 @@ show_downloads: true  # Adds a download link for your repo
 logo: "/assets/images/logo.jpg"
 plugins:
   - jekyll-sass-converter
+  
+<link rel="stylesheet" href="style.css">
+
