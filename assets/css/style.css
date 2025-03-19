@@ -1,0 +1,10 @@
+body {
+    background-color: #0d0d0d; /* Dark background */
+    color: #d1b3ff; /* Light purple text */
+}
+h1, h2, h3 {
+    color: #a855f7; /* Purple headings */
+}
+a {
+    color: #8b5cf6; /* Vibrant purple links */
+}
