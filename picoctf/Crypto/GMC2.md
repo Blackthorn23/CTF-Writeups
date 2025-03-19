@@ -55,3 +55,4 @@ Now that we have a **rainbow table** stored in `rainbow_table.json`, we can **se
 ```bash
 picoCTF{cHeEsY7feac875}
 
+🔗 [Back to Home](../index.md)
