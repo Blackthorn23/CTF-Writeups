@@ -42,7 +42,7 @@ Since the cheese names are hashed with a **2-character hexadecimal salt**, we ge
 Now that we have a **rainbow table** stored in `rainbow_table.json`, we can **search for the given hash** and retrieve the correct **cheese name and salt**.  
 
 📜 **Solver Script:**  
-[🔗 `solve_cheese.py`](../../assets/scripts/picoctf/crypto/GMC2/solve_cheese.py)  
+[🔗 `solve_cheese.py`](../../assets/scripts/picoCTF/Crypto/GMC2/solve_cheese.py)  
 
 ### 🔧 How It Works  
 - Connects to the **server**.  
