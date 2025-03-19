@@ -2,6 +2,6 @@
 
 Choose a challenge:
 
-- [Bitlocker-2 Writeup](bitlocker-2.md)
-- [Caesar Cipher Challenge](caesar.md)
+- [Guess My Cheese (Part 1)](GMC1.md)
+- [Guess My Cheese (Part 2)](GGMC2.md)
 
