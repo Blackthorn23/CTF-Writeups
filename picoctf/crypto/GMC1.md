@@ -29,8 +29,7 @@ From the encrypted outputs of two different cheese names, we can determine that 
 
 #### 4️⃣ Analyzing the Hint  
 The hint references **"affinity for linear equations"**, which strongly suggests an **Affine Cipher**.  
-To confirm this, we checked with ChatGPT about possible ciphers that match this pattern:  
-<img src="../../assets/images/picoCTF/Crypto/GMC1/GMC(chat).png" alt="Guess My Cheese Question" width="1000" />
+To confirm this, we checked with ChatGPT about possible ciphers that match this pattern.
 
 #### 5️⃣ Solving the Affine Cipher  
 The **Affine Cipher** follows the encryption formula:
