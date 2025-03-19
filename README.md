@@ -7,3 +7,6 @@ This is my first time writing up solutions for CTF challenges. Before this, I us
 From now on, I'll be recording all my approaches, strategies, and solutions here so you can follow along, pick up new techniques, and maybe even find better ways to solve these challenges. Let's level up together! 🚀  
 
 Happy hacking! 💻🔍  
+
+### 📌 Check out my write-ups here:  
+🔗 [CTF Writeups Website](https://blackthorn23.github.io/CTF-Writeups/)
