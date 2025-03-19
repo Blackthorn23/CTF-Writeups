@@ -1,9 +1,10 @@
 ---
-title: "Guess My Cheese (Part 1)"
+Title: "Guess My Cheese (Part 1)"
 ---
 
-## 🔑 Bitlocker-2 Challenge Writeup
-In this challenge, I extracted a BitLocker key from a RAM dump using **Volatility**.
+## 🧀 Guess My Cheese (Part 1)
+The question asked
+
 
 **Steps:**
 1. Loaded the memory dump into Volatility.
