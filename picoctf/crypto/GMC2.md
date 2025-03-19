@@ -28,7 +28,7 @@ We are given a cheese list containing names of various cheeses:
 Since the cheese names are hashed with a **2-character hexadecimal salt**, we generate all possible salted variations and store their **SHA-256 hashes**.  
 
 📜 **Generating the Rainbow Table:**  
-[🔗 `rainbow_table.py`](../../assets/scripts/picoctf/crypto/GMC2/rainbow_table.py)  
+[🔗 `rainbow_table.py`](../../assets/scripts/picoCTF/Crypto/GMC2/rainbow_table.py)  
 
 ### 🔧 How It Works  
 - Loads **cheese names** from `cheese_list.txt`.  
