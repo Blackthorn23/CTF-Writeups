@@ -48,5 +48,9 @@ Using the encryptions of two known cheese names, we can solve for `a` and `b`, t
 I wrote a Python script to automate this decryption:  
 📜 **[GMC1.py](../../assets/scripts/picoCTF/GMC1.py)**  
 
+#### 🏁 The Flag  
+After decrypting the cheese name, we obtained the flag:  
+**`picoCTF{ChEeSy8313f058}`** 🎉  
+
 🔗 [Back to Home](../index.md)
 
