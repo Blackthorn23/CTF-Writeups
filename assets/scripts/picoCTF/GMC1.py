@@ -26,8 +26,8 @@ def find_affine_params(plaintext, ciphertext):
     return a, b
 
 # Known encryptions
-plaintext1, ciphertext1 = "MOZZARELLA", "HBUURSFKKR"
-plaintext2, ciphertext2 = "CHEDDAR", "LWFIIRS"
+plaintext1, ciphertext1 = "MOZZARELLA", "PFCCXQDUUX"
+plaintext2, ciphertext2 = "CHEDDAR", "NODIIXQ"
 
 # Find affine parameters
 try:
@@ -38,6 +38,6 @@ except:
 print(f"Found affine parameters: a={a}, b={b}")
 
 # Given encrypted cheese name
-ciphertext = "SJOFEPJPT"
+ciphertext = "TFLADUGTQDDKWGR"
 decrypted_text = affine_decrypt(ciphertext, a, b)
 print(f"Decrypted cheese: {decrypted_text}")
