@@ -22,7 +22,7 @@ First, let's connect to the server using `nc` (netcat) to see what the challenge
 ### 2️⃣ Understanding the given cheese list 
 We are given a cheese list containing names of various cheeses:
 📜 Cheese List:
-[🔗 `cheese_list.txt`](../../assets/scripts/picoctf/crypto/GMC2/cheese_list.txt)  
+[🔗 `cheese_list.txt`](../../assets/scripts/picoCTF/Crypto/GMC2/cheese_list.txt)  
 
 ### 3️⃣ Precomputing Hashes (Rainbow Table)  
 Since the cheese names are hashed with a **2-character hexadecimal salt**, we generate all possible salted variations and store their **SHA-256 hashes**.  
