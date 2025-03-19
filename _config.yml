@@ -1,4 +1,6 @@
 title: "CTF Writeups by Nawfal Syafi"
 description: "A collection of my CTF challenge solutions."
-theme: jekyll-theme-minimal  # Change the theme if needed
+theme: jekyll-theme-cayman  # A more visually appealing theme
 markdown: kramdown
+show_downloads: true  # Adds a download link for your repo
+logo: "/assets/logo.png"  # Add your custom logo (upload it first)
