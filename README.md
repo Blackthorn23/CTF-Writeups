@@ -8,5 +8,4 @@ From now on, I'll be recording all my approaches, strategies, and solutions here
 
 Happy hacking! 💻🔍  
 
-### 📌 Check out my write-ups here:  
-🔗 [CTF Writeups Website](https://blackthorn23.github.io/CTF-Writeups/)
+
