@@ -7,6 +7,6 @@ plugins:
   - jekyll-sass-converter
   
 <link rel="stylesheet" href="style.css">
-<img src="images/Logo.png">
+<img src="assets/images/logo.jpg">
 
 
