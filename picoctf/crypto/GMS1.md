@@ -1,6 +1,6 @@
 ## 🧀 Guess My Cheese (Part 1)
 ### The question asked
-<img src="../../assets/images/GMS1(question).png" alt="Guess My Cheese Question" width="200" />
+<img src="../../assets/images/picoCTF/GMS1(question).png" alt="Guess My Cheese Question" width="200" />
 
 ### The given hint:  
 > Remember that cipher we devised together, Squeexy?  
@@ -8,8 +8,11 @@
 
 ### Steps:
 1. Let's nc into the server first to see our challenge
-   
-3. Analyze the contents using appropriate Volatility plugins.
+<img src="../../assets/images/picoCTF/GMC1(nc).png" alt="Guess My Cheese Question" width="200" />
+
+2. Given 2 option to encrypt a message (e) or guess the cheese (g), we only have 3 attemps which means (2 encryptions and 1 guess)
+<img src="../../assets/images/picoCTF/GMC1(e).png" alt="Guess My Cheese Question" width="200" />
+
 4. Extract the necessary data and retrieve the key.
 
 🔗 [Back to Home](../index.md)
