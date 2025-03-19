@@ -1,4 +1,4 @@
-![BlackWolf Logo](/assets/images/logo.png){ width=200 height=100 }
+![BlackWolf Logo](assets/images/logo.jpg){ width=200 height=100 }
 
 ---
 title: "CTF Writeups"
