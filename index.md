@@ -1,6 +1,7 @@
 ---
 title: "CTF Writeups"
 ---
+![BlackWolf Logo](/assets/images/logo.jpg)
 
 ## Welcome to My CTF Writeups
 This site contains my writeups for CTF challenges.
