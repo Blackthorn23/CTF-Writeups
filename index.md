@@ -5,6 +5,6 @@
 Welcome to my collection of CTF writeups. Click on a CTF event to view challenges.
 
 ## CTF Events
-- [PicoCTF](picoctf/index.md)
+- [picoCTF 2025](picoctf/index.md)
 - [HackTheBox](htb/index.md)
 - [TryHackMe](thm/index.md)
