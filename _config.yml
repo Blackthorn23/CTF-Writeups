@@ -3,9 +3,10 @@ description: "A collection of my CTF challenge solutions."
 theme: jekyll-theme-cayman  # A more visually appealing theme
 markdown: kramdown
 show_downloads: true  # Adds a download link for your repo
-logo: "/assets/images/logo.jpg"
 plugins:
   - jekyll-sass-converter
   
 <link rel="stylesheet" href="style.css">
+<img src="images/blackwolf.png" alt="BlackWolf Logo">
+
 
