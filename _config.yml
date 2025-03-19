@@ -7,6 +7,6 @@ plugins:
   - jekyll-sass-converter
   
 <link rel="stylesheet" href="style.css">
-<img src="images/blackwolf.png" alt="BlackWolf Logo">
+<img src="images/Logo.png">
 
 
