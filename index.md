@@ -1,4 +1,4 @@
-![BlackWolf Logo](/assets/images/logo.png){ width=200 height=100 }
+<img src="/assets/images/logo.jpg" alt="BlackWolf Logo" width="200" />
 
 ---
 title: "CTF Writeups"
