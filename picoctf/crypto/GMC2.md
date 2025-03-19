@@ -17,4 +17,4 @@ nc verbal-sleep.picoctf.net 52980
 ### 1️⃣ Connecting to the Challenge  
 First, let's connect to the server using `nc` (netcat) to see what the challenge is about.  
 
-<img src="assets/images/picoCTF/Crypto/GMC2/GMC2(question).png" alt="Guess My Cheese Question" width="200" />
+<img src="../../assets/images/picoCTF/Crypto/GMC2/GMC2(question).png" alt="Guess My Cheese Question" width="200" />
