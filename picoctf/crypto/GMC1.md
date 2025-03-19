@@ -1,6 +1,9 @@
 ## 🧀 Guess My Cheese (Part 1)
-### The Question Asked
-<img src="../../assets/images/picoCTF/GMS1(question).png" alt="Guess My Cheese Question" width="200" />
+## 🧐 The Challenge  
+We are given a server to connect to using `nc`:  
+```bash
+nc verbal-sleep.picoctf.net 58487
+```
 
 ### The Given Hint:  
 > Remember that cipher we devised together, Squeexy?  
