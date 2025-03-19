@@ -2,5 +2,5 @@
 
 Select a category:
 
-- [Crypto](crypto/index.md)
+- [Crypto](picoctf/crypto/index.md)
 - [Reverse Engineering](reverse-engineering/index.md)
