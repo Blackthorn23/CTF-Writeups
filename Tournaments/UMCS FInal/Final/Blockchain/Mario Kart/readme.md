@@ -24,11 +24,11 @@ the challenge and obtain the flag.
 
 ## ✨ Walkthrough
 
-![img](picture1.png)
+![img](Picture1.png)
 
 For this challenge we are given 2 SOL File, analyzing them file we found that  
 
-![img](picture2.png)
+![img](Picture2.png)
 
 Here I will explain the script I created and used to solve this question =)  
 
@@ -36,39 +36,39 @@ Here I will explain the script I created and used to solve this question =)
 The Setup contract contains a function `getMainContract()` that returns the address of the 
 main challenge contract. We can call it directly using Web3:
 
-![img](picture3.png)
+![img](Picture3.png)
 
 ### Step 2: Join the Race
 The first step in the contract logic is to join the race using the `joinRace(string)` payable 
 function. It seems we’re required to send exactly 1 ETH with a name (e.g., "Haxor"):
 
-![img](picture4.png)
+![img](Picture4.png)
 
 ### Step 3: Start the Race
 Once we’ve joined, we need to start the race by calling:
 
-![img](picture5.png)
+![img](Picture5.png)
 
 ### Step 4: Accelerate Until Finish
 To progress in the race, we repeatedly call `accelerate()` until the `raceFinished()` flag returns 
 true. We check and loop with a short delay:
 
-![img](picture6.png)
+![img](Picture6.png)
 
 ### Step 5: Check if the Challenge is Solved
 Finally, once the race is finished, we query the Setup contract to check if we successfully 
 completed the challenge:
 
-![img](picture7.png)
+![img](Picture7.png)
 
 Running the script using node:
 
-![img](picture8.png)
-![img](picture9.png)
+![img](Picture8.png)
+![img](Picture9.png)
 
 We go back to the Blockchain Launcher and obtain the flag…    
 
-![img](picture10.png)
+![img](Picture10.png)
 ---
 
 ## 🚩 Flag
