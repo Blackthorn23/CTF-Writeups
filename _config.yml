@@ -1,4 +1,21 @@
-title: "CTF Writeups by Nawfal Syafi"
-description: "A collection of my CTF challenge solutions."
-theme: jekyll-theme-minimal  # Change the theme if needed
+title: "Collection of My CTF Writeups"
+description: "🔐 CTF Writeups focused on Web Exploitation, Cryptography, and Boot2Root"
+theme: jekyll-theme-cayman
 markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Site settings
+author: elitemi24
+email: your.email@example.com
+github_username: elitemi24
+linkedin_username: your-linkedin-username
+
+# Google Analytics (optional)
+# google_analytics: UA-XXXXXXXX-X
+
+# Build settings
+sass:
+  style: compressed
