@@ -2,7 +2,7 @@
 
 > Category: Forensics 🕵️
 
-![img](question.png)
+![img](Question.png)
 
 ## 🔍 Overview
 
