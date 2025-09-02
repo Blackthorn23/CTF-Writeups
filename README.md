@@ -1,153 +1,201 @@
-# Collection of My CTF Writeups
+# 🛡️ Blackthorn23's Security Arsenal
 
 [![Jekyll](https://img.shields.io/badge/powered%20by-Jekyll-red.svg)](https://jekyllrb.com/)
 [![GitHub Pages](https://img.shields.io/badge/hosted%20on-GitHub%20Pages-blue.svg)](https://pages.github.com/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![CTF](https://img.shields.io/badge/focus-CTF%20Challenges-purple.svg)](https://github.com/Blackthorn23/CTF-Writeups)
+[![Security](https://img.shields.io/badge/passion-Cybersecurity-green.svg)](https://github.com/Blackthorn23/CTF-Writeups)
 
 ```
-┌──(blackthorn23@security)-[~/CTF-WriteUp]
-└─$ cat README.md
+╭─[blackthorn23@security-lab]─[~/workspace]
+╰─➤ cat mission.txt
 
-Welcome to Blackthorn23's CTF Writeup Repository
-Building skills in Web Exploitation🕸️, Cryptography🔑, and Boot2Root⚔️
+🎯 Mission: Building expertise in ethical hacking through hands-on CTF challenges
+🔍 Focus: Real-world security techniques and vulnerability research  
+⚡ Journey: From beginner to advanced cybersecurity practitioner
 ```
 
-## 🎯 About This Repository
+## 🚀 What You'll Find Here
 
-This repository documents my journey through various CTF competitions and cybersecurity learning platforms. As I develop skills in penetration testing, cryptography, and security research, this collection serves as both a reference and a showcase of my progress in cybersecurity.
+This repository documents my practical journey through cybersecurity challenges, focusing on **real techniques** and **actionable knowledge**. Each writeup is crafted to help both my future self and fellow security enthusiasts understand not just the **what**, but the **why** and **how** behind each solution.
 
-## 🏆 Competition Highlights
+### 🎯 **Core Focus Areas**
 
-### 📊 **Current Competitions:**
-- **🚀 picoCTF 2025**: Participating
-- **� Various CTF Events**: Building experience
-- **📚 Learning Platforms**: Active on TryHackMe & HackTheBox
+**🔐 Cryptography & Analysis**
+- Mathematical approach to cipher breaking
+- Hash function attacks and rainbow tables
+- Modern cryptographic vulnerability research
 
-### 📈 **Goals for 2025:**
-- **🥇 Top 10 Finishes**: Aiming for competitive placements
-- **📖 Platform Mastery**: Complete learning paths
-- **🔧 Skill Development**: Focus on practical techniques
-- **📈 CURTIN CTF 2024**: 16th Placement
+**🌐 Web Application Security**  
+- Injection techniques and mitigation bypasses
+- Authentication and authorization flaws
+- Client-side and server-side exploitation
 
-## 📚 Learning Platforms
+**🔍 Digital Forensics & Investigation**
+- Evidence extraction and analysis techniques
+- Network traffic inspection and correlation
+- Memory and file system forensics
 
-- **🌐 TryHackMe**: [Your Profile](https://tryhackme.com/p/your-username)
-- **🎯 HackTheBox**: [Your Profile](https://app.hackthebox.com/users/your-id)
-- **🔧 Practice Labs**: Various security challenges
-- **📋 Certifications**: Pursuing industry certifications
+## 🏆 Active Competitions & Challenges
 
-## 🚀 Quick Start
+### 📈 **Current Focus: picoCTF 2025**
+Currently competing and documenting solutions for one of the world's largest cybersecurity competitions.
 
-### 🌐 View Online
-Visit the live site: **[CTF Writeups Website](https://blackthorn23.github.io/CTF-Writeups/)**
+**Progress Highlights:**
+- ✅ **Cryptography**: Deep dives into classical and modern cipher analysis
+- 🔄 **Web Exploitation**: Exploring advanced injection techniques  
+- 🎯 **Forensics**: Building investigation methodologies
+- ⚡ **Reverse Engineering**: Dissecting binaries and understanding program flow
 
-### 💻 Run Locally
-```bash
-git clone https://github.com/Blackthorn23/CTF-Writeups.git
-cd CTF-Writeups
-bundle install
-bundle exec jekyll serve
-```
+## 🧠 Learning Methodology
 
-## 📁 Repository Structure
+### 📚 **Platforms & Practice**
+- **TryHackMe**: Hands-on guided learning paths
+- **HackTheBox**: Real-world penetration testing scenarios
+- **Custom Labs**: Self-built vulnerable environments
+
+### 🛠️ **Technical Approach**
+- **Documentation-First**: Every solution includes detailed methodology
+- **Tool Mastery**: Building proficiency with industry-standard tools
+- **Code Analysis**: Understanding exploits at the source code level
+- **Methodology Development**: Creating repeatable attack patterns
+
+## 🔬 Featured Writeups
+
+### 🔐 **Cryptography Challenges**
+- **[Guess My Cheese (Part 1)](Tournaments/picoCTF%202025/Crypto/GMC1.md)**: Affine cipher cryptanalysis using mathematical linear equations
+- **[Guess My Cheese (Part 2)](Tournaments/picoCTF%202025/Crypto/GMC2.md)**: SHA-256 hash cracking with rainbow table optimization
+
+### 🌐 **Web Exploitation** (Coming Soon)
+- Advanced injection techniques
+- Authentication bypass methodologies
+- Server-side request forgery (SSRF)
+
+### 🔍 **Digital Forensics** (In Development)
+- Network traffic analysis
+- Memory dump investigation
+- Steganography detection techniques
+
+## 📁 Repository Architecture
 
 ```
 CTF-Writeups/
-├── Host/                    # CTF Workshop materials
-├── Learning/               # Educational platform writeups
-│   ├── TryHackMe/
-│   ├── HackTheBox/
-│   └── Practice/
-├── Tournaments/           # Competition writeups
-│   └── Current/
-└── assets/               # Images and scripts
+├── Tournaments/           # Competition-specific challenges
+│   └── picoCTF 2025/     # Current active competition
+│       ├── Crypto/       # Cryptography challenges
+│       ├── Web/          # Web exploitation
+│       ├── Forensics/    # Digital forensics
+│       └── Binary/       # Reverse engineering
+├── Learning/             # Platform-based learning
+│   ├── TryHackMe/       # Guided learning paths
+│   ├── HackTheBox/      # Real-world scenarios
+│   └── Labs/            # Custom practice environments
+├── Tools/               # Custom scripts and utilities
+└── assets/              # Supporting materials
 ```
 
-## 🎯 Focus Areas
+## 🛠️ Technical Toolkit
 
-### 🕸️ **Web Exploitation**
-- XSS (Cross-Site Scripting)
-- SQL Injection
-- CSRF (Cross-Site Request Forgery)
-- Authentication bypasses
-- Server-side vulnerabilities
+### 🔍 **Reconnaissance & Discovery**
+```bash
+# Network scanning and enumeration
+nmap, masscan, gobuster, ffuf
+# Custom reconnaissance scripts
+python, bash, powershell
+```
 
-### 🔑 **Cryptography**
-- Classical ciphers
-- Modern cryptographic attacks
-- Hash functions
-- Digital signatures
-- Key management
+### 💻 **Exploitation & Analysis**
+```bash
+# Web application testing
+burpsuite, owasp-zap, sqlmap
+# Binary analysis and reverse engineering
+ghidra, ida, gdb, radare2
+# Cryptographic analysis
+sage, python-crypto, hashcat
+```
 
-### ⚔️ **Boot2Root**
-- Linux privilege escalation
-- Windows exploitation
-- Network enumeration
-- Service exploitation
-- Post-exploitation techniques
+### 🔐 **Cryptanalysis Specialization**
+- **Mathematical Foundation**: Linear algebra, number theory, modular arithmetic
+- **Classical Ciphers**: Caesar, Vigenère, Affine, Substitution analysis
+- **Modern Attacks**: Hash collisions, rainbow tables, side-channel analysis
+- **Custom Tools**: Python-based cryptanalysis frameworks
 
-## 🛠️ Tools & Technologies
+## 📊 Current Statistics
 
-### 🌐 **Web Security:**
-- Burp Suite Professional
-- OWASP ZAP
-- SQLmap
-- XSStrike
-- Gobuster
+| Metric | Progress | Details |
+|--------|----------|---------|
+| **🏆 Competitions** | 1+ Active | Focusing on quality over quantity |
+| **📝 Detailed Writeups** | 2+ Published | In-depth technical analysis |
+| **🎯 Categories Explored** | 4 Primary | Crypto, Web, Forensics, RE |
+| **🛠️ Tools Mastered** | 15+ Core | Industry-standard toolkit |
+| **📚 Learning Hours** | 100+ Hours | Continuous skill development |
 
-### 🔍 **Reconnaissance:**
-- Nmap
-- Masscan
-- Amass
-- Subfinder
-- FFuF
+## 🚀 Quick Start Guide
 
-### 💻 **Exploitation:**
-- Metasploit
-- Custom Python scripts
-- Exploit-DB
-- SearchSploit
-- Custom payloads
+### 🌐 **View Online**
+Explore the live website: **[blackthorn23.github.io/CTF-Writeups](https://blackthorn23.github.io/CTF-Writeups/)**
 
-## 📊 Statistics
+### 💻 **Local Development**
+```bash
+# Clone the repository
+git clone https://github.com/Blackthorn23/CTF-Writeups.git
+cd CTF-Writeups
 
-- **📈 Competitions Entered**: Growing
-- **� Active Platforms**: TryHackMe, HackTheBox
-- **📚 Learning Areas**: Web, Crypto, Boot2Root
-- **📝 Writeups**: Building collection
-- **🔧 Skills**: Continuously improving
+# Install dependencies (requires Ruby & Jekyll)
+bundle install
 
-## 🎓 Learning & Development
+# Serve locally
+bundle exec jekyll serve
 
-- **Continuous Learning**: TryHackMe, HackTheBox
-- **Skill Focus**: Practical penetration testing
-- **Community**: Engaging with cybersecurity community
+# Access at http://localhost:4000
+```
 
-## 🤝 Community Involvement
+### 📖 **Navigate the Content**
+- **Start with**: [Current Competition Writeups](Tournaments/picoCTF%202025/)
+- **Learn techniques**: Browse by category (Crypto, Web, Forensics)
+- **Understand methodology**: Each writeup includes detailed explanations
+- **Practice along**: All tools and commands are documented
 
-### 🎯 **Learning Journey**
-- **Active Learning**: Engaging with cybersecurity platforms
-- **Skill Building**: Participating in various challenges
+## 🎯 Future Roadmap
 
-### 🏆 **Competitions**
-- **CTF Participation**: Building competitive experience
-- **Continuous Growth**: Developing practical skills
-- **Knowledge Sharing**: Contributing to the community
+### 📈 **Short-term Goals (Q1 2025)**
+- Complete picoCTF 2025 with detailed writeups
+- Expand web exploitation technique documentation
+- Build custom cryptanalysis tool suite
 
-## 🔗 Connect
+### 🚀 **Long-term Vision (2025-2026)**
+- Contribute to open-source security tools
+- Develop advanced forensics methodologies
+- Share knowledge through workshops and presentations
 
+## 🤝 Connect & Collaborate
+
+### 💬 **Let's Connect**
 - **GitHub**: [@Blackthorn23](https://github.com/Blackthorn23)
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/your-linkedin)
-- **TryHackMe**: [Your Username](https://tryhackme.com/p/your-username)
-- **HackTheBox**: [Your Profile](https://app.hackthebox.com/users/your-id)
+- **Website**: [CTF Writeups](https://blackthorn23.github.io/CTF-Writeups/)
 
-## 📄 License
+### 🎓 **Learning Together**
+- **Feedback Welcome**: Open issues for questions or suggestions
+- **Collaboration**: Always open to joint CTF participation
+- **Knowledge Sharing**: Feel free to reference and build upon these techniques
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 📄 License & Usage
+
+This project is open source under the MIT License. Feel free to:
+- ✅ Reference techniques and methodologies
+- ✅ Build upon the analysis frameworks
+- ✅ Share and adapt for educational purposes
+- ❌ Use for malicious activities
 
 ---
 
 <div align="center">
-  <p><strong>🔐 Stay Secure, Keep Learning! 🔐</strong></p>
-  <p><em>uid=1337(blackthorn23) gid=1337(hackers) groups=1337(hackers)</em></p>
+  <h3>🔐 Security Through Knowledge • Knowledge Through Practice 🔐</h3>
+  <p><em>uid=1337(blackthorn23) gid=security(hacker) groups=security(hacker),ctf(player)</em></p>
+  
+  <br>
+  
+  <strong>🚀 Ready to dive into the technical details?</strong><br>
+  <a href="https://blackthorn23.github.io/CTF-Writeups/">Explore the Live Site</a> | 
+  <a href="Tournaments/picoCTF%202025/">View Latest Writeups</a> | 
+  <a href="#-connect--collaborate">Get in Touch</a>
 </div>
