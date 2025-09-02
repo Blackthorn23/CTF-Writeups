@@ -1,20 +1,8 @@
----
-layout: default
-title: "PicoCTF 2025 - Forensics"
-description: "Digital forensics challenge writeups from PicoCTF 2025"
----
+# 🔍 PicoCTF 2025 - Forensics
 
-<div align="center">
-  <h1>🔍 PicoCTF 2025 - Forensics</h1>
-  <p style="font-size: 1.1em; color: #666; margin-bottom: 30px;">
-    Investigate digital evidence and uncover hidden secrets
-  </p>
-  
-  <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;">
-    <img src="https://img.shields.io/badge/Category-Forensics-green?style=for-the-badge" alt="Forensics" />
-    <img src="https://img.shields.io/badge/Status-Coming%20Soon-yellow?style=for-the-badge" alt="Coming Soon" />
-  </div>
-</div>
+Investigate digital evidence and uncover hidden secrets
+
+![Category](https://img.shields.io/badge/Category-Forensics-green?style=for-the-badge) ![Status](https://img.shields.io/badge/Status-Coming%20Soon-yellow?style=for-the-badge)
 
 ---
 

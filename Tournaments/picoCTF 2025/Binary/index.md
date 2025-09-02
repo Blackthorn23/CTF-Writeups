@@ -1,20 +1,8 @@
----
-layout: default
-title: "PicoCTF 2025 - Binary Exploitation"
-description: "Binary exploitation challenge writeups from PicoCTF 2025"
----
+# 💥 PicoCTF 2025 - Binary Exploitation
 
-<div align="center">
-  <h1>💥 PicoCTF 2025 - Binary Exploitation</h1>
-  <p style="font-size: 1.1em; color: #666; margin-bottom: 30px;">
-    Master the art of memory corruption and system exploitation
-  </p>
-  
-  <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;">
-    <img src="https://img.shields.io/badge/Category-Binary%20Exploitation-orange?style=for-the-badge" alt="Binary Exploitation" />
-    <img src="https://img.shields.io/badge/Status-Coming%20Soon-yellow?style=for-the-badge" alt="Coming Soon" />
-  </div>
-</div>
+Master the art of memory corruption and system exploitation
+
+![Category](https://img.shields.io/badge/Category-Binary%20Exploitation-orange?style=for-the-badge) ![Status](https://img.shields.io/badge/Status-Coming%20Soon-yellow?style=for-the-badge)
 
 ---
 

@@ -1,18 +1,8 @@
----
-layout: default
-title: "PicoCTF 2025 Writeups"
-description: "Comprehensive writeups for PicoCTF 2025 challenges"
----
+# 🚩 PicoCTF 2025 Writeups
 
-<div align="center">
-  <h1>🚩 PicoCTF 2025 Writeups</h1>
-  <p style="font-size: 1.1em; color: #666; margin-bottom: 30px;">
-    A comprehensive collection of solutions for PicoCTF 2025 challenges across multiple categories
-  </p>
-  
-  <img src="https://img.shields.io/badge/CTF-PicoCTF%202025-blue?style=for-the-badge" alt="PicoCTF 2025" />
-  <img src="https://img.shields.io/badge/Difficulty-Beginner%20to%20Intermediate-green?style=for-the-badge" alt="Difficulty" />
-</div>
+A comprehensive collection of solutions for PicoCTF 2025 challenges across multiple categories
+
+![PicoCTF 2025](https://img.shields.io/badge/CTF-PicoCTF%202025-blue?style=for-the-badge) ![Difficulty](https://img.shields.io/badge/Difficulty-Beginner%20to%20Intermediate-green?style=for-the-badge)
 
 ---
 

@@ -1,21 +1,8 @@
----
-layout: default
-title: "PicoCTF 2025 - Cryptography Challenges"
-description: "Cryptography challenge writeups from PicoCTF 2025"
----
+# 🔐 PicoCTF 2025 - Cryptography
 
-<div align="center">
-  <h1>🔐 PicoCTF 2025 - Cryptography</h1>
-  <p style="font-size: 1.1em; color: #666; margin-bottom: 30px;">
-    Decode secrets, break ciphers, and master the art of cryptanalysis
-  </p>
-  
-  <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;">
-    <img src="https://img.shields.io/badge/Category-Cryptography-red?style=for-the-badge" alt="Cryptography" />
-    <img src="https://img.shields.io/badge/Challenges-2-blue?style=for-the-badge" alt="Challenges" />
-    <img src="https://img.shields.io/badge/Difficulty-Beginner-green?style=for-the-badge" alt="Difficulty" />
-  </div>
-</div>
+Decode secrets, break ciphers, and master the art of cryptanalysis
+
+![Category](https://img.shields.io/badge/Category-Cryptography-red?style=for-the-badge) ![Challenges](https://img.shields.io/badge/Challenges-2-blue?style=for-the-badge) ![Difficulty](https://img.shields.io/badge/Difficulty-Beginner-green?style=for-the-badge)
 
 ---
 

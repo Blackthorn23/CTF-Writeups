@@ -1,25 +1,8 @@
----
-layout: default
-title: "Guess My Cheese (Part 1) - PicoCTF 2025"
-description: "Affine Cipher cryptanalysis writeup for PicoCTF 2025"
-category: cryptography
-difficulty: easy
-tags: [cryptography, affine-cipher, linear-equations, python]
----
+# 🧀 Guess My Cheese (Part 1) - PicoCTF 2025
 
-<div align="center">
-  <h1>🧀 Guess My Cheese (Part 1)</h1>
-  
-  <div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;">
-    <span style="background: #e74c3c; color: white; padding: 5px 12px; border-radius: 15px; font-size: 0.9em; font-weight: bold;">🔐 Cryptography</span>
-    <span style="background: #27ae60; color: white; padding: 5px 12px; border-radius: 15px; font-size: 0.9em; font-weight: bold;">📈 Easy</span>
-    <span style="background: #3498db; color: white; padding: 5px 12px; border-radius: 15px; font-size: 0.9em; font-weight: bold;">⭐ Featured</span>
-  </div>
-  
-  <p style="font-size: 1.1em; color: #666; margin: 20px 0; max-width: 600px;">
-    Dive into the world of classical cryptography with this Affine Cipher challenge. Learn to break linear equation-based encryption through mathematical analysis.
-  </p>
-</div>
+**Category:** Cryptography | **Difficulty:** Easy | **Points:** TBD
+
+Dive into the world of classical cryptography with this Affine Cipher challenge. Learn to break linear equation-based encryption through mathematical analysis.
 
 ---
 
