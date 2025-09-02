@@ -1,0 +1,71 @@
+/* Cyberpunk Theme for Nawfal Syafi's CTF Writeups */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body {
+    background: linear-gradient(135deg, #0d0d0d, #1a001a);
+    color: #b300ff;
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0px 0px 5px #ff00ff;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    color: #ff00ff;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #6600cc;
+}
+
+a {
+    color: #00ffff;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    transform: scale(1.1);
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ff00ff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #ff00ff;
+}
+
+.ctf-events {
+    text-align: center;
+}
+
+.ctf-events li {
+    list-style: none;
+    font-size: 1.2em;
+    padding: 10px;
+    background: rgba(255, 0, 255, 0.1);
+    border-radius: 5px;
+    margin: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.ctf-events li:hover {
+    background: rgba(255, 0, 255, 0.3);
+    box-shadow: 0 0 10px #ff00ff;
+    transform: scale(1.05);
+}
+
+@keyframes glitch {
+    0% { text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+    50% { text-shadow: -2px -2px #ff00ff, 2px 2px #00ffff; }
+    100% { text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+}
+
+title, h1 {
+    animation: glitch 0.5s infinite alternate;
+}
