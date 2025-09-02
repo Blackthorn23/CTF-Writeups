@@ -14,7 +14,7 @@ This repository contains comprehensive writeups and documentation for cybersecur
 
 | Section | Description | Status |
 |---------|-------------|--------|
-| **🏆 [Tournaments](./Tournaments/)** | CTF competition writeups | 🟢 Active |
+| **🏆 [Tournaments](./Tournaments/)** | PDF writeups for CTF competitions | � Planned |
 | **📚 [Learning](./Learning/)** | Platform progress tracking | 🟢 Active |
 | **🎯 [Host](./Host/)** | Workshop documentation | 🟡 Planned |
 
@@ -22,17 +22,9 @@ This repository contains comprehensive writeups and documentation for cybersecur
 
 ## 🏆 Tournament Writeups
 
-### PicoCTF 2025
-- **📁 Location:** [`/Tournaments/picoCTF 2025/`](./Tournaments/picoCTF%202025/)
-- **🎯 Categories:** Cryptography, Forensics, Binary Exploitation, Reverse Engineering
-- **📊 Progress:** In Progress
+The `Tournaments/` directory is prepared for PDF writeups from various CTF competitions. Each tournament will have its own subdirectory containing comprehensive PDF documentation.
 
-| Category | Challenges | Status |
-|----------|------------|--------|
-| 🔐 **Cryptography** | 2 | ✅ Complete |
-| 🔍 **Forensics** | TBD | 🟡 Planned |
-| 💥 **Binary Exploitation** | TBD | 🟡 Planned |
-| 🔧 **Reverse Engineering** | TBD | 🟡 Planned |
+**Structure:** `Tournaments/[Tournament-Name]/writeup.pdf`
 
 ---
 
@@ -54,12 +46,9 @@ This repository contains comprehensive writeups and documentation for cybersecur
 
 ```
 CTF-Writeups/
-├── 🏆 Tournaments/           # Competition writeups
-│   └── picoCTF 2025/        # Current tournament
-│       ├── Crypto/          # Cryptography challenges
-│       ├── Forensics/       # Digital forensics
-│       ├── Binary/          # Binary exploitation
-│       └── Reverse Engineering/
+├── 🏆 Tournaments/           # PDF writeups for tournaments
+│   └── [Tournament-Name]/   # Individual tournament folders
+│       └── writeup.pdf      # Comprehensive PDF writeup
 ├── 📚 Learning/             # Learning platform progress
 │   ├── TryHackMe/          # THM room completions
 │   └── HackTheBox/         # HTB machine writeups
@@ -132,10 +121,10 @@ While this is primarily a personal learning repository, contributions are welcom
 
 | Metric | Value |
 |--------|-------|
-| **🏆 Tournaments Participated** | 1+ |
-| **📝 Writeups Completed** | 2+ |
-| **🔧 Categories Covered** | 4 |
-| **📚 Learning Hours** | 100+ |
+| **🏆 Tournaments Participated** | TBD |
+| **📝 PDF Writeups** | TBD |
+| **� Learning Hours** | 100+ |
+| **🎯 Platforms Used** | 2+ |
 
 ---
 
