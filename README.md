@@ -5,46 +5,45 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ```
-┌──(elitemi24@n3wbees)-[~/CTF-WriteUp]
+┌──(blackthorn23@security)-[~/CTF-WriteUp]
 └─$ cat README.md
 
-Welcome to elitemi24's CTF Writeup Zone
-Currently focused on Web Exploitation🕸️ but also interested in Cryptography🔑 and Boot2Root⚔️
+Welcome to Blackthorn23's CTF Writeup Repository
+Building skills in Web Exploitation🕸️, Cryptography🔑, and Boot2Root⚔️
 ```
 
 ## 🎯 About This Repository
 
-This repository contains my journey through various CTF competitions, learning platforms, and security workshops. From hosting my own CTF events to competing in tournaments across Malaysia and internationally, this collection represents my growth in cybersecurity.
+This repository documents my journey through various CTF competitions and cybersecurity learning platforms. As I develop skills in penetration testing, cryptography, and security research, this collection serves as both a reference and a showcase of my progress in cybersecurity.
 
 ## 🏆 Competition Highlights
 
-### 📊 **2025 Results:**
-- **🥉 picoCTF 2025**: 186th Placement
-- **🏅 BBCTF 2025**: 9th Placement  
-- **🥇 UMCS 2025**: 5th Placement in Final
-- **🥇 UTeMCTF 2025**: 5th Placement
-- **🎯 SunCTF 2025**: 15th Placement
+### 📊 **Current Competitions:**
+- **🚀 picoCTF 2025**: Participating
+- **� Various CTF Events**: Building experience
+- **📚 Learning Platforms**: Active on TryHackMe & HackTheBox
 
-### 📊 **2024 Results:**
-- **🏅 APU IBoH CTF 2024**: 10th in Local Category
-- **🎯 PWC Hackaday 2024**: 8th in Malaysia
+### 📈 **Goals for 2025:**
+- **🥇 Top 10 Finishes**: Aiming for competitive placements
+- **📖 Platform Mastery**: Complete learning paths
+- **🔧 Skill Development**: Focus on practical techniques
 - **📈 CURTIN CTF 2024**: 16th Placement
 
 ## 📚 Learning Platforms
 
-- **🌐 TryHackMe**: [Profile](https://tryhackme.com/p/iffathanafiah)
-- **🎯 HackTheBox**: [Profile](https://app.hackthebox.com/users/2146466)
-- **🔧 XSS Challenge**: Advanced XSS techniques
-- **📋 0day NPT 2025**: Professional certification prep
+- **🌐 TryHackMe**: [Your Profile](https://tryhackme.com/p/your-username)
+- **🎯 HackTheBox**: [Your Profile](https://app.hackthebox.com/users/your-id)
+- **🔧 Practice Labs**: Various security challenges
+- **📋 Certifications**: Pursuing industry certifications
 
 ## 🚀 Quick Start
 
 ### 🌐 View Online
-Visit the live site: **[CTF Writeups Website](https://elitemi24.github.io/CTF-Writeups/)**
+Visit the live site: **[CTF Writeups Website](https://blackthorn23.github.io/CTF-Writeups/)**
 
 ### 💻 Run Locally
 ```bash
-git clone https://github.com/elitemi24/CTF-Writeups.git
+git clone https://github.com/Blackthorn23/CTF-Writeups.git
 cd CTF-Writeups
 bundle install
 bundle exec jekyll serve
@@ -54,15 +53,13 @@ bundle exec jekyll serve
 
 ```
 CTF-Writeups/
-├── Host/                    # CTF Workshop hosting materials
+├── Host/                    # CTF Workshop materials
 ├── Learning/               # Educational platform writeups
 │   ├── TryHackMe/
 │   ├── HackTheBox/
-│   ├── XSS Challenge/
-│   └── 0day-NPT/
+│   └── Practice/
 ├── Tournaments/           # Competition writeups
-│   ├── 2024/
-│   └── 2025/
+│   └── Current/
 └── assets/               # Images and scripts
 ```
 
@@ -114,34 +111,35 @@ CTF-Writeups/
 
 ## 📊 Statistics
 
-- **📈 Total Competitions**: 12+
-- **🏆 Top 10 Finishes**: 6
-- **📚 Learning Platforms**: 4
-- **🔧 Workshop Hosted**: 1
-- **📝 Writeups Published**: 50+
+- **📈 Competitions Entered**: Growing
+- **� Active Platforms**: TryHackMe, HackTheBox
+- **📚 Learning Areas**: Web, Crypto, Boot2Root
+- **📝 Writeups**: Building collection
+- **🔧 Skills**: Continuously improving
 
-## 🎓 Certifications & Learning
+## 🎓 Learning & Development
 
-- **0day NPT 2025**: Network Penetration Testing
 - **Continuous Learning**: TryHackMe, HackTheBox
-- **Workshop Facilitation**: Flag Hunters CTF Workshop
+- **Skill Focus**: Practical penetration testing
+- **Community**: Engaging with cybersecurity community
 
 ## 🤝 Community Involvement
 
-### 📌 **Hosting**
-- **Flag Hunters CTF Workshop**: Led cybersecurity workshop for university students
+### 🎯 **Learning Journey**
+- **Active Learning**: Engaging with cybersecurity platforms
+- **Skill Building**: Participating in various challenges
 
 ### 🏆 **Competitions**
-- Regular participant in Malaysian CTF scene
-- International CTF competitions
-- Continuous skill development
+- **CTF Participation**: Building competitive experience
+- **Continuous Growth**: Developing practical skills
+- **Knowledge Sharing**: Contributing to the community
 
 ## 🔗 Connect
 
-- **GitHub**: [@elitemi24](https://github.com/elitemi24)
+- **GitHub**: [@Blackthorn23](https://github.com/Blackthorn23)
 - **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/your-linkedin)
-- **TryHackMe**: [iffathanafiah](https://tryhackme.com/p/iffathanafiah)
-- **HackTheBox**: [Profile](https://app.hackthebox.com/users/2146466)
+- **TryHackMe**: [Your Username](https://tryhackme.com/p/your-username)
+- **HackTheBox**: [Your Profile](https://app.hackthebox.com/users/your-id)
 
 ## 📄 License
 
@@ -151,5 +149,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
   <p><strong>🔐 Stay Secure, Keep Learning! 🔐</strong></p>
-  <p><em>uid=1337(elitemi24) gid=1337(n3wbees) groups=1337(n3wbees)</em></p>
+  <p><em>uid=1337(blackthorn23) gid=1337(hackers) groups=1337(hackers)</em></p>
 </div>
