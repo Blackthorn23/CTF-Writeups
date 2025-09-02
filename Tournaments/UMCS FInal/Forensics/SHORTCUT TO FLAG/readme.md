@@ -2,54 +2,125 @@
 
 > Category: Forensics 🕵️
 
-![img](image1)
+![img](question.png)
 
 ## 🔍 Overview
 
-One of our analysts noticed suspicious activity originating from a workstation after an employee clicked what appeared to be a password file.  
-Upon investigation, we found this mysterious `.LNK` file in their **Downloads** folder.
+One of our analysts noticed suspicious activity originating from a workstation after an employee clicked what appeared to be a password files.  
+Upon investigation, we found this mysterious `.LNK` file in their Downloads folder.
 
 ---
 
-## ✨ Solution
+## ✨ Walkthrough
 
-### Step 1: Inspect the LNK file
-We started with the `password.lnk` file. Since it’s a Windows shortcut, we analyzed it using the **lnkparse** tool to extract detailed metadata.
+As a forensic student this challenge is solvable        
 
-![img](image2)
+Given a password.lnk file, knowing it is an lnk file I used **lnkparse** tool to gain full information about it. 
 
-The output revealed **command-line arguments** used by the challenge creator.  
-Most importantly, it showed an **Encoding Byte process**.
+![img](picture2.png)
 
----
+Ahh! Look at what we found here this is interesting          
 
-### Step 2: Decode the payload
-The `.lnk` file contained obfuscated data. To recover it, we:
+Here we can see that this lnk file leaks a command line arguments that shows us the process done by the challenge creator before this. But what interest me is the Encoding Byte process…
 
-1. Skipped the **first 3044 bytes** (junk data).  
-2. Applied **XOR decryption with key `0x38`** to the rest of the bytes.  
-3. Saved the output as an executable (`.exe`).  
+Using this script I reverse the process, with XOR I decrypted each byte with `0x38` and skipped the first 3044 bytes (trash) and saved the payload.     
 
-![img](image3)
+![img](picture3.png)
 
----
+Using `strings` command, we can see the inside of the created exe file.  
 
-### Step 3: Analyze the executable
-Next, we examined the recovered `.exe` file:
+![img](picture4.png)
 
-- Using `strings`, we found suspicious values inside.  
-- Opening the file in **dnSpy** revealed that the program renamed itself to `umcs`.  
-- The entry point was located at the `P.Main` function.  
+Then, I used **dnSpy** to open the `.exe` file and boom the file renamed automatically to `umcs` (YEEAAAAA)  
 
-![img](image4)
+Analyzing the file reveals use that the Entry point started at `P.Main` function.  
+
+![img](picture5.png)
 
 ---
 
-### Step 4: Review the C# code
-The decompiled C# program showed the following:
+## ✨ Decompiled C# Code
 
 ```csharp
-private static void Main(string[] a)
-{
-    P.F("BFE835EC4F752566B213A12E79CD76B85885D03A7AC457707ED3065A92C7229EE2574D045F1D");
-}
+using System; 
+using System.Linq; 
+using System.Text; 
+
+// Token: 0x02000002 RID: 2 
+internal class P 
+{ 
+    private static void Main(string[] a) 
+    { 
+        P.F("BFE835EC4F752566B213A12E79CD76B85885D03A7AC457707ED3065A92C7229EE2574D045F1D"); 
+    } 
+
+    private static byte[] F(string x) 
+    { 
+        byte[] array = new byte[x.Length / 2]; 
+        for (int i = 0; i < array.Length; i++) 
+        { 
+            array[i] = Convert.ToByte(x.Substring(i * 2, 2), 16); 
+        } 
+        byte[] bytes = BitConverter.GetBytes(3735927486U); 
+        string s = P.G(); 
+        return P.H(P.X(array, bytes), Encoding.UTF8.GetBytes(s)); 
+    } 
+
+    private static string G() 
+    { 
+        byte[] source = Convert.FromBase64String("bmV2ZXJnMXYzdXA="); 
+        return Encoding.ASCII.GetString((from b in source 
+        select (byte)(b << 4 >> 4 ^ 0)).ToArray<byte>()); 
+    } 
+
+    private static byte[] X(byte[] d, byte[] k) 
+    { 
+        byte[] array = new byte[d.Length]; 
+        for (int i = 0; i < d.Length; i++) 
+        { 
+            array[i] = (d[i] ^ k[i % 4]); 
+        } 
+        return array; 
+    } 
+
+    private static byte[] H(byte[] d, byte[] k) 
+    { 
+        byte[] array = new byte[d.Length]; 
+        byte[] array2 = new byte[256]; 
+        for (int i = 0; i < 256; i++) 
+        { 
+            array2[i] = (byte)i; 
+        } 
+        int num = 0; 
+        for (int j = 0; j < 256; j++) 
+        { 
+            num = (num + (int)array2[j] + (int)k[j % k.Length]) % 256; 
+            byte b = array2[j]; 
+            array2[j] = array2[num]; 
+            array2[num] = b; 
+        } 
+        int num2 = 0; 
+        num = 0; 
+        for (int l = 0; l < d.Length; l++) 
+        { 
+            num2 = (num2 + 1) % 256; 
+            num = (num + (int)array2[num2]) % 256; 
+            byte b2 = array2[num2]; 
+            array2[num2] = array2[num]; 
+            array2[num] = b2; 
+            array[l] = (d[l] ^ array2[(int)(array2[num2] + array2[num]) % 256]); 
+        } 
+        return array; 
+    } 
+} 
+```
+
+![img](picture6.png)
+
+---
+
+## 🚩 Flag
+```
+UMCS{281e271947b31e6dad08629bbcb53462}
+```
+
