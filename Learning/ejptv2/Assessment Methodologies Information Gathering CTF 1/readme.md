@@ -1,4 +1,39 @@
-# EJPT v2 - Assessment Methodologies: Information Gathering CTF 1
+# EJPT v2 - Assessment Methodologies: Information### Step 3: Perform nmap 
+![Directory Analysis](picture8.png)
+
+<details>
+<summary>Click to expand</summary>
+
+With connectivity confirmed, the next step was to run an Nmap scan on the target to identify open ports and running services. Nmap (Network Mapper) is an essential reconnaissance tool that provides detailed information about the target's network exposure.
+
+The basic Nmap scan command used was:
+```bash
+nmap target_ip
+```
+
+For more comprehensive results, additional scan options can be employed:
+```bash
+# Service version detection
+nmap -sV target_ip
+
+# Service and script scanning
+nmap -sC -sV target_ip
+
+# Scan all ports
+nmap -p- target_ip
+```
+
+The Nmap scan results revealed:
+- **Open ports**: Identified which services are accessible
+- **Service versions**: Determined the specific versions of running services
+- **Operating system hints**: Gathered clues about the target's OS
+- **Service banners**: Obtained additional service information
+
+During this enumeration phase, I discovered that **FLAG 2** was embedded within the Nmap scan results or service banner information, demonstrating how network reconnaissance can directly lead to flag discovery in CTF environments.
+
+This scan provided the foundation for understanding the target's attack surface and guided subsequent enumeration efforts toward the identified services.
+
+</details>g CTF 1
 
 ## Overview
 This repository contains a detailed walkthrough of the Information Gathering CTF challenge from the eLearnSecurity Junior Penetration Tester (EJPTv2) certification course. This CTF focuses on fundamental assessment methodologies and information gathering techniques essential for penetration testing.
@@ -19,9 +54,6 @@ This lab focuses on information gathering and reconnaissance techniques to analy
 
 ## Lab Overview 
 ![Network Discovery](picture1.png)
-
-The task is to find 5 flags by carefully enumerating the target website.
-
 ![Port Scanning](picture2.png)
 
 Carefully understand what each of the flag required tasks and where could they be located.
@@ -50,13 +82,13 @@ As a preliminary step, I performed a simple ping test to check whether the targe
 
 </details>
 
-### Step 3: Perform nmap 
+### Step 3: Perform nmap scanning 
 ![Directory Analysis](picture8.png)
 
 <details>
 <summary>Click to expand</summary>
 
-With connectivity confirmed, the next step was to run an Nmap scan on the target. This process helps identify open ports, available services, and potential entry points for further exploration. The scan provides a clearer picture of the system’s surface exposure, forming the foundation for deeper enumeration and vulnerability assessment.
+With connectivity confirmed, the next step was to run an Nmap scan on the target. This process helps identify open ports, available services, and potential entry points for further exploration. The scan provides a clearer picture of the system’s surface exposure, forming the foundation for deeper enumeration and vulnerability assessment This reveal **FLAG 2**.
 
 </details>
 
@@ -76,7 +108,26 @@ Following the Nmap scan, it was clear that the target was running a web service 
 <details>
 <summary>Click to expand</summary>
 
-A useful clue from the first flag hint. I examined the robots.txt file located at the root of the server. This file serves as a set of guidelines for search engines, essentially telling them what content to index and what to avoid.
+Following the initial website reconnaissance, I examined the robots.txt file located at the root of the server. The robots.txt file is a standard used by websites to communicate with web crawlers and search engines, providing instructions about which parts of the site should or should not be indexed.
+
+To access the robots.txt file, I navigated to:
+```
+http://target_ip/robots.txt
+```
+
+The robots.txt file typically contains:
+- **Disallow directives**: Paths that search engines should not crawl
+- **Allow directives**: Explicitly permitted paths
+- **Sitemap locations**: References to XML sitemaps
+- **Crawl-delay settings**: Instructions for crawler behavior
+
+This file is particularly valuable during reconnaissance because:
+1. **Hidden directories**: Often reveals directories administrators want to keep private
+2. **Sensitive paths**: May point to admin panels, backup directories, or development areas
+3. **Site structure insights**: Provides a roadmap of important website sections
+4. **Security through obscurity failures**: Exposes paths meant to be hidden
+
+Upon examining the robots.txt file, I discovered **FLAG 1**.
 
 </details>
 
@@ -90,94 +141,82 @@ Using Dirb to discover hidden directories and files on the target website. This 
 
 </details>
 
-### Step 7: Web application technology identification
+### Step 7: Directory browsing on where files were stored
 ![Technology Identification](picture10.png)
 ![Source Code Analysis](picture11.png)
 <details>
 <summary>Click to expand</summary>
 
-Identifying the specific technologies, frameworks, and versions used by the target web application. This information helps in understanding potential attack vectors and known vulnerabilities.
+After discovering directories through the Dirb enumeration, the next crucial step was to manually browse through the identified directories to examine their contents. This involved systematically navigating to each discovered directory and analyzing what files and subdirectories were accessible. 
 
+During this exploration, I found `/wp-content/uploads` directory which is a common WordPress directory where uploaded files are stored. This directory contains the **FLAG 3**.
 </details>
 
-### Step 8: Robots.txt and sitemap analysis
-![Robots Analysis](picture12.png)
+### Step 8: An overlooked backup file
+![Robots Analysis](picture13.png)
 
 <details>
-<summary>Click to expand - Robots.txt and sitemap examination</summary>
+<summary>Click to expand</summary>
 
-Checking for robots.txt file and sitemaps to understand the website structure and identify directories or files that the website administrators don't want indexed by search engines.
+Asking chatgpt, I discovered a backup file used by wordpress named `wp-config.bak`/`wp-config.php.bak`
 
+These backup files can have various naming conventions such as:
+- `.bak` extensions (e.g., `config.php.bak`)
+- Tilde suffix (e.g., `index.php~`)
+- `.old` extensions (e.g., `database.sql.old`)
+- Date-based naming (e.g., `backup_2023.zip`)
 </details>
 
-### Step 10: HTTP headers and response analysis
-![HTTP Headers](picture13.png)
+### Step 9: Opening the backup file 
+![HTTP Headers](picture12.png)
 
-<details>
-<summary>Click to expand - HTTP response analysis</summary>
-
-Analyzing HTTP headers to gather information about the web server, security headers, cookies, and other response details that might reveal security configurations or vulnerabilities.
-
-</details>
-
-### Step 11: Error page analysis and information disclosure
-![Error Analysis](picture14.png)
-
-<details>
-<summary>Click to expand - Error page enumeration</summary>
-
-Testing for custom error pages and analyzing error messages that might disclose sensitive information about the web application, database, or server configuration.
-
-</details>
-
-### Step 12: Hidden parameter and form analysis
 ![Parameter Analysis](picture15.png)
 
 <details>
-<summary>Click to expand - Form and parameter discovery</summary>
+<summary>Click to expand</summary>
 
-Identifying hidden form parameters, analyzing form submissions, and testing for parameter manipulation vulnerabilities that could lead to information disclosure.
+After discovering the backup file `wp-config.php.bak`, the next step was to access and examine its contents. When attempting to open this file through the web browser, it automatically triggered a download of the backup file to the local machine.
 
-</details>
+The `wp-config.php` file is particularly sensitive in WordPress installations as it contains critical configuration information including:
+- Database connection credentials
+- Authentication keys and salts
+- Table prefix information
+- Debug settings
+- Security keys
 
-### Step 13: Cookie and session analysis
-![Cookie Analysis](picture16.png)
-
-<details>
-<summary>Click to expand - Cookie and session examination</summary>
-
-Examining cookies and session management to understand how the application handles user sessions and whether there are any security weaknesses in session implementation.
-
-</details>
-
-### Step 14: SSL/TLS certificate analysis
-![Certificate Analysis](picture17.png)
-
-<details>
-<summary>Click to expand - SSL certificate examination</summary>
-
-Analyzing SSL/TLS certificates to gather information about the organization, validity periods, and potential certificate-related vulnerabilities or misconfigurations.
+Using the `cat` command to examine the downloaded backup file revealed its complete contents, including database credentials and other sensitive configuration data. Most importantly, this backup file contained **Flag 4**.
 
 </details>
 
-### Step 15: Social engineering and OSINT gathering
-![OSINT Gathering](picture18.png)
 
-<details>
-<summary>Click to expand - Open source intelligence techniques</summary>
+### Step 10: Download the website content using httrack
+![Cookie Analysis](picture18.png)
 
-Gathering publicly available information about the target organization, employees, and infrastructure that could be useful for the assessment or social engineering attacks.
-
-</details>
-
-### Step 16: Flag discovery and validation
 ![Flag Discovery](picture19.png)
 
 <details>
-<summary>Click to expand - Flag identification and submission</summary>
+<summary>Click to expand</summary>
 
-Systematically identifying and validating the 5 flags hidden throughout the target website using the information gathered from previous enumeration steps.
+To perform a comprehensive analysis of the website and ensure no hidden content was missed, I used HTTrack to create a complete local mirror of the target website. HTTrack is a powerful website copying utility that downloads entire websites to local storage, preserving the directory structure and all linked files.
 
+The HTTrack command used was:
+```bash
+httrack http://target_ip/ -O /path/to/output/directory/
+```
+
+This process systematically downloads:
+- All HTML pages and their content
+- Images, CSS, and JavaScript files
+- Linked documents and media files
+- Directory structures and file hierarchies
+- Hidden or referenced files that might not be discoverable through manual browsing
+
+```bash
+# Search for FLAG5
+grep -i "FLAG5" -R target.ine.local/
+```
+
+This systematic analysis of the mirrored content revealed **Flag 5**.
 </details>
 
 ## Key Learning Objectives
