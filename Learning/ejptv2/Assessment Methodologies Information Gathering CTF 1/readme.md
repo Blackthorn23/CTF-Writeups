@@ -33,7 +33,7 @@ During this enumeration phase, I discovered that **FLAG 2** was embedded within 
 
 This scan provided the foundation for understanding the target's attack surface and guided subsequent enumeration efforts toward the identified services.
 
-</details>g CTF 1
+</details>
 
 ## Overview
 This repository contains a detailed walkthrough of the Information Gathering CTF challenge from the eLearnSecurity Junior Penetration Tester (EJPTv2) certification course. This CTF focuses on fundamental assessment methodologies and information gathering techniques essential for penetration testing.
