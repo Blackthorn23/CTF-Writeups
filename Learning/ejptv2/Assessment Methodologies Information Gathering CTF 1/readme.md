@@ -1,39 +1,5 @@
-# EJPT v2 - Assessment Methodologies: Information### Step 3: Perform nmap 
-![Directory Analysis](picture8.png)
+# EJPT v2 - Assessment Methodologies: Information
 
-<details>
-<summary>Click to expand</summary>
-
-With connectivity confirmed, the next step was to run an Nmap scan on the target to identify open ports and running services. Nmap (Network Mapper) is an essential reconnaissance tool that provides detailed information about the target's network exposure.
-
-The basic Nmap scan command used was:
-```bash
-nmap target_ip
-```
-
-For more comprehensive results, additional scan options can be employed:
-```bash
-# Service version detection
-nmap -sV target_ip
-
-# Service and script scanning
-nmap -sC -sV target_ip
-
-# Scan all ports
-nmap -p- target_ip
-```
-
-The Nmap scan results revealed:
-- **Open ports**: Identified which services are accessible
-- **Service versions**: Determined the specific versions of running services
-- **Operating system hints**: Gathered clues about the target's OS
-- **Service banners**: Obtained additional service information
-
-During this enumeration phase, I discovered that **FLAG 2** was embedded within the Nmap scan results or service banner information, demonstrating how network reconnaissance can directly lead to flag discovery in CTF environments.
-
-This scan provided the foundation for understanding the target's attack surface and guided subsequent enumeration efforts toward the identified services.
-
-</details>
 
 ## Overview
 This repository contains a detailed walkthrough of the Information Gathering CTF challenge from the eLearnSecurity Junior Penetration Tester (EJPTv2) certification course. This CTF focuses on fundamental assessment methodologies and information gathering techniques essential for penetration testing.
