@@ -205,11 +205,70 @@ The cracked password was:
 ```bash
 !@#$%^
 ```
-**Step 7: Finding what the credentials is for**
+**Step 7: Enumerating Internal Services**
+After gaining the credentials for the backrest, I checked for running services with:
+
+```bash
+ss -tulpn
+```
 ![Root Directory](picture36.png)
 
+I found several interesting ports bound to localhost only, including 5000 (Flask app) and 9898 (Backrest panel).
+
+**Step 8: SSH Port Forwarding to Access Services**
+
+To reach these internal services, I used SSH tunneling:
+
+```bash
+ssh -L 5000:127.0.0.1:5000 gael@<TARGET IP>
+ssh -L 9898:127.0.0.1:9898 gael@<TARGET IP>
+```
+
+![Root Directory](picture37.png)
+![Root Directory](picture39.png)
+
+**Step 9: Visit the websites**
+
+![Root Directory](picture38.png)
+![Root Directory](picture40.png)
+
+**Step 10: Logging into Backrest**
+I logged in using the credentials backrest_root.
+
+![Root Directory](picture41.png)
+
+**Step 11: Creating a Repository**
+Using restic, I created a new repository at /home/gael/myrepo and set a password.
+
+```bash
+/opt/backrest/restic -r /home/gael/myrepo init
+/opt/backrest/restic -r /home/gael/myrepo key passwd
+```
+![Root Directory](picture42.png)
+
+Then I linked it inside Backrest’s web panel:
+
+![Root Directory](picture43.png)
+
+**Step 12: Backing up /root Directory**
+
+From the Backrest web UI, I executed a backup command to archive /root.
+
+![Root Directory](picture44.png)
+
+**Step 13: Accessing the Snapshot**
+Inside the repo, I located the snapshot:
+
+![Root Directory](picture45.png)
+
+Then from the Backrest web UI, I executed a list command on the snapshot id.
+![Root Directory](picture46.png)
+
+Dumping the snapshot files revealed the root.txt flag. 🎉
+
+![Root Directory](picture47.png)
+![Root Directory](picture48.png)
 > **⚠️ Disclaimer:** This writeup is for educational purposes only. Always ensure you have proper authorization before testing security tools and techniques. The author is not responsible for any misuse of the information provided.
 
-**🎯 Machine Completed:** `$(date)`
-**⏱️ Total Time:** `X hours Y minutes`
+**🎯 Machine Completed:** `5 Sep 2025`
 **🏆 Flags Captured:** `2/2`
