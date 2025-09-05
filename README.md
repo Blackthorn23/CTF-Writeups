@@ -11,9 +11,9 @@ This repository contains comprehensive writeups and documentation for cybersecur
 
 | Section | Description | Status |
 |---------|-------------|--------|
-| **🏆 [Tournaments](./Tournaments/)** | PDF writeups for CTF competitions | � Planned |
+| **🏆 [Tournaments](./Tournaments/)** | PDF writeups for CTF competitions | 🟢 Active |
 | **📚 [Learning](./Learning/)** | Platform progress tracking | 🟢 Active |
-| **🎯 [Workshop](./Workshop/)** | Workshop documentation | 🟡 Planned |
+| **🎯 [Workshop](./Workshop/)** | Workshop documentation | 🟢 Active |
 
 ---
 
