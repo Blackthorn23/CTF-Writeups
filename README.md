@@ -1,4 +1,4 @@
-# 🔐 Blackthorn23's Security Arsenal
+# 🔐 Blackthorn23's Writeups
 
 > **CTF Challenges and Cybersecurity Learning Journey**
 
