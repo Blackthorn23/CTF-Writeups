@@ -1,3 +1,5 @@
+<img src="https://vignette.wikia.nocookie.net/caseclosed/images/8/80/Infobox_-_Conan_Edogawa.png/revision/latest/scale-to-width-down/2000?cb=20190205090116" alt="Conan Edogawa" width="60%"/>
+
 # 🔐 conan's Writeups
 
 [![CTF](https://img.shields.io/badge/CTF-Active%20Player-red?style=for-the-badge)](https://github.com/Blackthorn23/CTF-Writeups)
