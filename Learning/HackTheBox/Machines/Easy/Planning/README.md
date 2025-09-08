@@ -5,11 +5,6 @@ The machine is Linux-based and rated *Easy*. The exploitation path involves enum
 
 ---
 
-## 🖼️ Walkthrough Screenshots
-This write-up is illustrated with 21 images showing each step, from initial reconnaissance to privilege escalation and final root flag capture.
-
----
-
 ## 🕵️‍♂️ 1. Machine Information
 ![Machine Info](picture1.png)
 
