@@ -1,8 +1,4 @@
 # HackTheBox - Planning (Linux - Easy)
-
-This repository contains my full walkthrough of the **Planning** machine from HackTheBox.  
-The machine is Linux-based and rated *Easy*. The exploitation path involves enumeration, discovering a Grafana instance, and exploiting **CVE-2024-9264** to gain a reverse shell, followed by privilege escalation.
-
 ---
 
 ## 🕵️‍♂️ 1. Machine Information
