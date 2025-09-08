@@ -1,9 +1,3 @@
----
-layout: default
-title: "HackTheBox Writeups"
-description: "HackTheBox machine and challenge writeups"
----
-
 # 🎯 HackTheBox Writeups
 
   <h1> edogawac0nan</h1>
