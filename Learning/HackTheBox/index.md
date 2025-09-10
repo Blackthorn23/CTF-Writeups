@@ -15,7 +15,7 @@
 - **[Fluffy](Machines/Easy/Fluffy/README.md)**  
 - **[Planning](Machines/Easy/Planning/README.md)** 
 - **[Soulmate](Machines/Easy/Soulmate/)**
-- **[Editor](Machines/Easy/Editor/)** 
+- **[Editor](Machines/Easy/Editor/README.md)** 
 
 ##  Medium Machines
 ##  Hard Machines
