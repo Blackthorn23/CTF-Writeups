@@ -14,7 +14,8 @@
 - **[Artificial](Machines/Easy/Artificial/readme.md)** 
 - **[Fluffy](Machines/Easy/Fluffy/README.md)**  
 - **[Planning](Machines/Easy/Planning/README.md)** 
-- **[Soulmate](Machines/Easy/Soulmate/)** 
+- **[Soulmate](Machines/Easy/Soulmate/)**
+- **[Editor](Machines/Easy/Editor/)** 
 
 ##  Medium Machines
 ##  Hard Machines
@@ -22,7 +23,7 @@
 
 ## 📊 Progress Statistics
 
-- **Easy Machines**: 4 completed
+- **Easy Machines**: 5 completed
 - **Medium Machines**: 0 completed  
 - **Hard Machines**: 0 completed
 
