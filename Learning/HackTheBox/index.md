@@ -14,7 +14,7 @@
 - **[Artificial](Machines/Easy/Artificial/readme.md)** 
 - **[Fluffy](Machines/Easy/Fluffy/README.md)**  
 - **[Planning](Machines/Easy/Planning/README.md)** 
-- **[Soulmate](Machines/Easy/Soulmate/)**
+- **[Soulmate](Machines/Easy/Soulmate/README_Soulmate.md)**
 - **[Editor](Machines/Easy/Editor/README.md)** 
 
 ##  Medium Machines
