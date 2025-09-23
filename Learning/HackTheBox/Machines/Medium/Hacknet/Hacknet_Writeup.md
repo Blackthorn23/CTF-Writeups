@@ -198,6 +198,7 @@ Checking the `/var/tmp/django_cache`, we see the permission `drwxrwxrwx 2 sandy 
 ![directory](picture18.png)
 
 Checkin inside the directory remains empty..
+
 ![directory](picture19.png)
 
 So, from what i research, the django.cache directory will store the temporary cache from the website, therefore to prove this let's trigger the explore function by using curl.
