@@ -1,6 +1,6 @@
 # Hacknet - HackTheBox Writeup
 
-![Nmap Results](Hacknet.jpeg)
+![Nmap Results](hacknet.jpeg)
 
 ## Machine Information
 - **Machine Name**: Hacknet
