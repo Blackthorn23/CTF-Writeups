@@ -19,7 +19,7 @@
 
 ##  Medium Machines
 
-- **[Editor](Machines/Medium/Hacknet/Hacknet_Writeup.md)**
+- **[Hacknet](Machines/Medium/Hacknet/Hacknet_Writeup.md)**
   
 ##  Hard Machines
 ---
