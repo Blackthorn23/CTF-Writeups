@@ -18,6 +18,9 @@
 - **[Editor](Machines/Easy/Editor/README.md)** 
 
 ##  Medium Machines
+
+- **[Editor](Machines/Medium/Hacknet/Hacknet_Writeup.md)**
+  
 ##  Hard Machines
 ---
 
