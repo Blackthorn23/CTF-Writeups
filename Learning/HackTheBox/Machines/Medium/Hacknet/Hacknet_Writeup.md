@@ -8,6 +8,8 @@
 
 ![Nmap Results](picture1.png)
 
+---
+
 ## Summary
 Hacknet involves exploiting a Django web application with multiple vulnerabilities including information disclosure through debug output and unsafe pickle deserialization leading to remote code execution.
 
