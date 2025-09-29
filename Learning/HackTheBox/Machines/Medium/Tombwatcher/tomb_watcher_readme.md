@@ -3,6 +3,8 @@
 ## Summary
 TombWatcher is a medium-difficulty Active Directory machine. The attack chain involved initial enumeration of exposed services, extracting gMSA credentials, abusing AD object ownership and ACL permissions, performing targeted Kerberoasting, and finally exploiting Active Directory Certificate Services (ADCS) misconfigurations (ESC15 / vulnerable templates) to escalate privileges to Domain Administrator. The box combined modern AD techniques with certificate abuse, making it both challenging and realistic.
 
+![Nmap Scan](tomb.png)
+
 ---
 
 ## Nmap Scan
