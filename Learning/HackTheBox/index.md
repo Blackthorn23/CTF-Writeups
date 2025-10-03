@@ -21,7 +21,7 @@
 
 - **[Hacknet](Machines/Medium/Hacknet/Hacknet_Writeup.md)**
 - **[Tombwatcher](Machines/Medium/Tombwatcher/tomb_watcher_readme.md)**
-- **[Imagery](Machines/Medium/Imagery/Readme.md)**
+- **[Imagery](Machines/Medium/Imagery/README.md)**
 
 ##  Hard Machines
 ---
