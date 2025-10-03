@@ -29,7 +29,7 @@
 ## 📊 Progress Statistics
 
 - **Easy Machines**: 5 completed
-- **Medium Machines**: 0 completed  
+- **Medium Machines**: 3 completed  
 - **Hard Machines**: 0 completed
 
 ---
