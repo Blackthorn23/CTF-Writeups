@@ -20,8 +20,7 @@
 ##  Medium Machines
 
 - **[Hacknet](Machines/Medium/Hacknet/Hacknet_Writeup.md)**
-
-- **[Tombwatcher](Machines/Medium/Hacknet/tomb_watcher_readme.md)**
+- **[Tombwatcher](Machines/Medium/Tombwatcher/tomb_watcher_readme.md)**
   
 ##  Hard Machines
 ---
