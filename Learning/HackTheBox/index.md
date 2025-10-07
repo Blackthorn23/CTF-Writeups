@@ -26,6 +26,8 @@
 ##  Hard Machines
 ---
 
+- **[Certificate](Machines/Hard/Certificate/readme.md)**
+
 ## 📊 Progress Statistics
 
 - **Easy Machines**: 5 completed
