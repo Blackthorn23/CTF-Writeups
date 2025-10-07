@@ -26,7 +26,7 @@
 ##  Hard Machines
 ---
 
-- **[Certificate](Machines/Hard/Certificate/readme.md)**
+- **[Certificate](Machines/Hard/Certificate/README.md)**
 
 ## 📊 Progress Statistics
 
