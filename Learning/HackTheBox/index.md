@@ -27,6 +27,7 @@
 ---
 
 - **[Certificate](Machines/Hard/Certificate/README.md)**
+- **[DarkZero](Machines/Hard/DarkZero/README.md)**
 
 ## 📊 Progress Statistics
 
