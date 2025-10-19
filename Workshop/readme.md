@@ -110,5 +110,3 @@ This track highlighted the importance of:
 - **Forensics Tools Reference**: [CyberChef](https://gchq.github.io/CyberChef/), [Volatility](https://github.com/volatilityfoundation/volatility), [Wireshark](https://www.wireshark.org/)  
 
 ---
-
-*Workshop facilitated by elitemi24 | Forensics Track | Giving back to the cybersecurity community*  
