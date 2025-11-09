@@ -29,11 +29,13 @@
 
 - **[Certificate](Machines/Hard/Certificate/README.md)**
 - **[DarkZero](Machines/Hard/DarkZero/README.md)**
+- **[Mirage](Machines/Hard/Mirage/)** <- Not complete yet
+- **[RustyKey](Machines/Hard/RustyKey/README.md)**
 
 ## 📊 Progress Statistics
 
 - **Easy Machines**: 5 completed
 - **Medium Machines**: 3 completed  
-- **Hard Machines**: 2 completed
+- **Hard Machines**: 4 completed
 
 ---
